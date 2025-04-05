@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style/style.css">
+    <link rel="icon" href="/public/favicon.ico">
+
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <title>Nivarium</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.expand();
+            }
+        });
+    </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+
+<body>
+    <!-- User Data Initialize -->
+    <script>
+        const userData = { ref_link: "{{ user_data['ref_link'] }}" };
+    </script>
+
+    <!--<div class="garland-container">
+        <svg width="556" height="129" viewBox="0 0 556 129" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M293.169 83.7987C252.051 83.7987 214.126 81.4034 181.658 78.2098C79.8603 68.0966 8.40259 47.8702 7.73724 47.6041C7.0719 47.3379 6.6727 46.6726 6.80577 46.0073C7.07191 45.3419 7.73724 44.9427 8.40259 45.0758C9.06793 45.3419 80.2595 65.5683 181.924 75.5484C275.737 84.8632 415.326 86.9923 547.862 45.0758C548.527 44.8097 549.326 45.2089 549.592 46.0073C549.858 46.6726 549.459 47.471 548.66 47.7372C461.633 75.1492 371.413 83.7987 293.169 83.7987Z"
+                fill="#1E2831" />
+            <path
+                d="M278.931 90.4521C278.798 90.4521 278.532 90.4521 278.399 90.4521C268.285 90.319 258.571 86.327 249.124 82.468C240.474 78.8752 232.357 75.5485 224.24 75.1493C215.058 74.617 205.61 77.1453 196.429 79.5405C186.715 82.2019 177.533 84.5971 168.617 83.6656C157.972 82.468 148.391 77.4114 139.076 72.621C131.092 68.4958 123.64 64.5038 116.055 63.3062C105.676 61.7093 95.2966 63.4392 85.3164 65.1691C76.1347 66.7659 67.3522 68.2297 59.7673 66.7659C41.0047 62.7739 35.4158 57.5842 29.96 52.6607C25.4357 48.5356 21.1775 44.5435 9.60053 41.2168C8.93519 40.9507 8.53598 40.2853 8.66905 39.62C8.93519 38.9547 9.60053 38.5555 10.2659 38.6885C22.5082 42.1483 27.1656 46.5396 31.6899 50.6647C37.1457 55.5882 42.2023 60.3787 60.1665 63.9715C67.2191 65.4353 75.7355 63.9715 84.6511 62.3747C94.8974 60.6448 105.41 58.7818 116.321 60.5117C124.305 61.7094 132.023 65.8345 140.141 70.0927C149.189 74.8831 158.637 79.8066 168.75 80.8712C177.134 81.8027 186.182 79.4074 195.63 76.8791C204.945 74.3508 214.659 71.6895 224.373 72.3548C232.889 72.8871 241.672 76.4799 250.055 79.9397C259.237 83.6656 268.818 87.6577 278.399 87.7907C287.314 87.9238 296.097 84.5971 305.545 81.0043C314.46 77.6776 323.509 74.2178 332.824 73.8186C341.606 73.5524 350.655 76.0807 359.437 78.7421C368.885 81.5365 378.732 84.464 388.18 83.5326C397.229 82.6011 405.745 78.2098 414.794 73.5524C423.044 69.2942 431.693 64.903 440.609 63.4392C449.258 62.1086 458.573 63.5723 467.622 64.903C477.469 66.4998 487.582 68.0966 496.764 65.9675C505.812 63.8384 514.063 57.9834 522.18 52.2615C529.632 46.9388 537.35 41.483 545.866 38.8216C546.531 38.5555 547.33 38.9547 547.596 39.7531C547.862 40.4184 547.463 41.2168 546.664 41.483C538.547 44.0113 530.962 49.4671 523.644 54.6567C515.393 60.5117 506.877 66.6329 497.296 68.762C487.582 71.0241 477.203 69.2942 467.09 67.6974C458.307 66.2337 449.125 64.903 440.875 66.2337C432.359 67.5644 423.975 71.9556 415.858 76.0807C406.943 80.6051 397.761 85.3955 388.18 86.327C378.333 87.2585 368.22 84.331 358.506 81.5365C349.457 78.8752 341.074 76.4799 332.691 76.7461C323.775 77.1453 314.859 80.472 306.21 83.7987C297.427 86.8593 288.113 90.4521 278.931 90.4521Z"
+                fill="#1E2831" />
+            <path
+                d="M32.2238 64.2376L21.9775 61.8424L23.8405 54.1244C24.5058 51.33 27.3003 49.6001 30.0947 50.2654C32.8891 50.9308 34.619 53.7252 33.9537 56.5197L32.2238 64.2376Z"
+                fill="#0F171E" />
+            <path
+                d="M32.2238 64.2376L21.9775 61.8424L22.6429 58.9149C23.3082 56.1205 26.1027 54.3906 28.8971 55.0559C31.6915 55.7213 33.4214 58.5157 32.7561 61.3101L32.2238 64.2376Z"
+                fill="#1E2831" />
+            <path
+                d="M40.1249 84.7537C44.1351 75.6787 40.0292 65.0709 30.9542 61.0607C21.8791 57.0505 11.2714 61.1564 7.26114 70.2314C3.25092 79.3065 7.3568 89.9143 16.4319 93.9245C25.507 97.9347 36.1147 93.8288 40.1249 84.7537Z"
+                fill="#E8524F" />
+            <path
+                d="M38.4196 77.7693C40.5571 70.1259 36.0936 62.1969 28.4502 60.0595C20.8068 57.922 12.8778 62.3855 10.7403 70.0289C8.60287 77.6723 13.0663 85.6013 20.7098 87.7387C28.3532 89.8762 36.2822 85.4127 38.4196 77.7693Z"
+                fill="#E77A78" />
+            <path
+                d="M31.2916 66.2337C31.0254 67.1652 31.6908 68.0967 32.6222 68.3628C33.5537 68.6289 34.4852 67.9636 34.7513 67.0321C35.0175 66.1006 34.3521 65.1692 33.4206 64.903C32.4892 64.7699 31.5577 65.3022 31.2916 66.2337Z"
+                fill="#BCBCBC" />
+            <path
+                d="M34.7517 70.6249C34.6186 71.0241 34.8848 71.5564 35.417 71.6895C35.8162 71.8225 36.3485 71.5564 36.4816 71.0241C36.6146 70.6249 36.3485 70.0926 35.8162 69.9596C35.284 69.8265 34.8848 70.0926 34.7517 70.6249Z"
+                fill="#BCBCBC" />
+            <path
+                d="M203.881 90.4521L193.502 91.5166L192.703 83.5325C192.437 80.605 194.566 78.0767 197.361 77.8106C200.288 77.5445 202.816 79.6736 203.082 82.468L203.881 90.4521Z"
+                fill="#0F171E" />
+            <path
+                d="M203.882 90.4521L193.502 91.5167L193.236 88.4561C192.97 85.5286 195.099 83.0003 197.894 82.7342C200.821 82.468 203.35 84.5971 203.616 87.3915L203.882 90.4521Z"
+                fill="#1E2831" />
+            <path
+                d="M206.67 122.497C215.919 118.905 220.505 108.496 216.914 99.2476C213.322 89.9989 202.913 85.4129 193.664 89.0044C184.416 92.596 179.829 103.005 183.421 112.254C187.013 121.502 197.422 126.088 206.67 122.497Z"
+                fill="#E8524F" />
+            <path
+                d="M214.128 100.698C214.927 108.682 209.072 115.735 201.22 116.4C193.236 117.199 186.184 111.344 185.518 103.493C184.853 95.6418 190.575 88.4561 198.426 87.7908C206.277 86.9924 213.33 92.8474 214.128 100.698Z"
+                fill="#E77A78" />
+            <path
+                d="M203.748 92.7143C203.881 93.6458 204.68 94.3111 205.611 94.3111C206.543 94.178 207.208 93.3796 207.208 92.4481C207.075 91.5167 206.277 90.8513 205.345 90.8513C204.281 90.8513 203.615 91.6497 203.748 92.7143Z"
+                fill="#BCBCBC" />
+            <path
+                d="M208.273 95.6418C208.273 96.174 208.806 96.4402 209.205 96.4402C209.737 96.4402 210.003 95.9079 210.003 95.5087C210.003 94.9764 209.471 94.7103 209.072 94.7103C208.673 94.7103 208.273 95.2425 208.273 95.6418Z"
+                fill="#BCBCBC" />
+            <path
+                d="M373.809 84.7302L366.224 91.9159L360.768 86.1939C358.772 84.0648 358.905 80.7381 360.901 78.7421C363.03 76.7461 366.357 76.8792 368.353 78.8752L373.809 84.7302Z"
+                fill="#0F171E" />
+            <path
+                d="M373.809 84.7302L366.224 91.9159L364.095 89.6537C362.099 87.5246 362.232 84.1979 364.228 82.2019C366.357 80.2059 369.684 80.3389 371.68 82.335L373.809 84.7302Z"
+                fill="#1E2831" />
+            <path
+                d="M393.237 86.7262C400.156 93.9119 399.89 105.356 392.704 112.142C385.519 119.062 374.075 118.796 367.288 111.61C360.369 104.424 360.635 92.9804 367.821 86.1939C375.006 79.2744 386.45 79.5405 393.237 86.7262Z"
+                fill="#E8524F" />
+            <path
+                d="M382.245 110.216C389.793 107.76 393.92 99.6513 391.465 92.1039C389.009 84.5565 380.9 80.4289 373.352 82.8846C365.805 85.3404 361.677 93.4495 364.133 100.997C366.589 108.544 374.698 112.672 382.245 110.216Z"
+                fill="#E77A78" />
+            <path
+                d="M375.007 86.5931C375.672 87.2585 376.737 87.2585 377.402 86.5931C378.067 85.9278 378.067 84.8632 377.402 84.1979C376.737 83.5325 375.672 83.5325 375.007 84.1979C374.341 84.8632 374.341 85.9278 375.007 86.5931Z"
+                fill="#BCBCBC" />
+            <path
+                d="M380.463 86.1939C380.729 86.5931 381.395 86.5931 381.661 86.1939C381.927 85.7947 382.06 85.2624 381.661 84.9963C381.395 84.5971 380.729 84.5971 380.463 84.9963C380.197 85.2624 380.197 85.7947 380.463 86.1939Z"
+                fill="#BCBCBC" />
+            <path
+                d="M522.314 39.3539L532.693 40.9507L531.496 48.8017C531.096 51.7292 528.435 53.5922 525.507 53.193C522.58 52.7938 520.717 50.1324 521.116 47.2049L522.314 39.3539Z"
+                fill="#0F171E" />
+            <path
+                d="M522.313 39.3539L532.693 40.9507L532.293 44.0113C531.894 46.9388 529.233 48.8017 526.305 48.4025C523.378 48.0033 521.515 45.342 521.914 42.4145L522.313 39.3539Z"
+                fill="#1E2831" />
+            <path
+                d="M541.807 38.6446C549.134 31.9557 549.651 20.5935 542.962 13.2666C536.273 5.93965 524.911 5.42249 517.584 12.1115C510.257 18.8005 509.74 30.1626 516.429 37.4895C523.118 44.8165 534.48 45.3336 541.807 38.6446Z"
+                fill="#E8524F" />
+            <path
+                d="M514.995 26.8454C516.193 18.9944 523.511 13.5386 531.362 14.7362C539.213 15.9338 544.669 23.2526 543.472 31.1036C542.274 38.9547 534.955 44.4105 527.104 43.2128C519.253 42.1483 513.797 34.6965 514.995 26.8454Z"
+                fill="#E77A78" />
+            <path
+                d="M523.112 37.2248C523.246 36.2933 522.58 35.3618 521.649 35.2287C520.717 35.0957 519.786 35.761 519.653 36.6925C519.52 37.624 520.185 38.5555 521.116 38.6885C522.048 38.8216 522.979 38.1563 523.112 37.2248Z"
+                fill="#BCBCBC" />
+            <path
+                d="M519.387 33.2327C519.52 32.7005 519.12 32.3012 518.721 32.3012C518.189 32.1682 517.79 32.5674 517.79 32.9666C517.657 33.4989 518.056 33.8981 518.455 33.8981C518.854 34.0311 519.254 33.6319 519.387 33.2327Z"
+                fill="#BCBCBC" />
+            <path
+                d="M94.3661 74.4839L83.9868 76.0807L82.7891 68.2297C82.3899 65.3022 84.386 62.6408 87.1804 62.2416C90.1079 61.8424 92.7693 63.8384 93.1685 66.6329L94.3661 74.4839Z"
+                fill="#0F171E" />
+            <path
+                d="M94.3665 74.4839L83.9872 76.0807L83.588 73.0201C83.1888 70.0926 85.1848 67.4313 87.9792 67.0321C90.9067 66.6329 93.5681 68.6289 93.9673 71.4233L94.3665 74.4839Z"
+                fill="#1E2831" />
+            <path
+                d="M109.27 87.2584C110.734 97.1055 103.947 106.287 94.1003 107.751C84.2532 109.215 75.0715 102.428 73.6077 92.5812C72.144 82.7341 78.9305 73.5524 88.7775 72.0886C98.6246 70.6249 107.673 77.4114 109.27 87.2584Z"
+                fill="#51E84F" />
+            <path
+                d="M105.144 84.1978C106.342 92.0489 100.886 99.3676 93.0353 100.565C85.1842 101.763 77.8655 96.3071 76.6679 88.456C75.4702 80.605 80.926 73.2862 88.7771 72.0886C96.6281 70.891 103.947 76.3468 105.144 84.1978Z"
+                fill="#51E84F" />
+            <path
+                d="M94.2328 76.613C94.3658 77.5445 95.2973 78.2098 96.2288 78.0768C97.1603 77.9437 97.8256 77.0122 97.6926 76.0807C97.5595 75.1493 96.628 74.4839 95.6965 74.617C94.765 74.8831 94.0997 75.6815 94.2328 76.613Z"
+                fill="#BCBCBC" />
+            <path
+                d="M99.0225 79.4074C99.1555 79.9397 99.5547 80.2058 99.9539 80.0728C100.486 79.9397 100.752 79.5405 100.619 79.1413C100.486 78.609 100.087 78.3429 99.6878 78.476C99.2886 78.476 99.0225 79.0082 99.0225 79.4074Z"
+                fill="#BCBCBC" />
+            <path
+                d="M257.507 69.5604L263.362 78.2098L256.709 82.6011C254.313 84.1979 250.987 83.5326 249.39 81.1373C247.793 78.7421 248.458 75.4154 250.854 73.8186L257.507 69.5604Z"
+                fill="#0F171E" />
+            <path
+                d="M257.507 69.5604L263.362 78.2098L260.834 79.9397C258.438 81.5366 255.112 80.8712 253.515 78.476C251.918 76.0808 252.583 72.754 254.979 71.1572L257.507 69.5604Z"
+                fill="#1E2831" />
+            <path
+                d="M283.787 79.925C291.657 73.8829 293.138 62.6052 287.096 54.7356C281.054 46.866 269.776 45.3845 261.906 51.4266C254.037 57.4687 252.555 68.7464 258.597 76.616C264.64 84.4856 275.917 85.9671 283.787 79.925Z"
+                fill="#51E84F" />
+            <path
+                d="M284.099 69.478C285.091 61.6028 279.512 54.4144 271.636 53.4223C263.761 52.4301 256.573 58.01 255.581 65.8851C254.588 73.7603 260.168 80.9487 268.043 81.9409C275.919 82.933 283.107 77.3532 284.099 69.478Z"
+                fill="#51E84F" />
+            <path
+                d="M259.503 68.6289C260.302 68.0966 260.568 67.0321 260.035 66.2337C259.503 65.4353 258.439 65.1691 257.64 65.7014C256.842 66.2337 256.576 67.2982 257.108 68.0966C257.64 69.0281 258.838 69.1612 259.503 68.6289Z"
+                fill="#BCBCBC" />
+            <path
+                d="M260.035 63.1731C260.434 62.907 260.568 62.3747 260.301 61.9755C260.035 61.5763 259.503 61.4432 259.104 61.7094C258.705 61.9755 258.572 62.5078 258.838 62.907C259.104 63.3062 259.636 63.4392 260.035 63.1731Z"
+                fill="#BCBCBC" />
+            <path
+                d="M406.411 66.6329L414.528 59.9795L419.585 66.1006C421.448 68.3628 421.049 71.6895 418.786 73.4194C416.524 75.2824 413.198 74.8831 411.468 72.621L406.411 66.6329Z"
+                fill="#0F171E" />
+            <path
+                d="M406.411 66.6329L414.528 59.9795L416.524 62.3747C418.387 64.6369 417.988 67.9636 415.726 69.6935C413.464 71.5564 410.137 71.1572 408.407 68.8951L406.411 66.6329Z"
+                fill="#1E2831" />
+            <path
+                d="M387.116 63.3062C380.861 55.5882 381.926 44.2774 389.644 38.0232C397.362 31.769 408.673 32.8335 414.927 40.5515C421.181 48.2695 420.117 59.5803 412.399 65.8345C404.814 72.0887 393.503 71.0241 387.116 63.3062Z"
+                fill="#51E84F" />
+            <path
+                d="M417.656 56.6925C418.755 48.8316 413.273 41.5686 405.412 40.4701C397.551 39.3716 390.288 44.8536 389.189 52.7145C388.091 60.5754 393.573 67.8384 401.434 68.9369C409.295 70.0354 416.558 64.5534 417.656 56.6925Z"
+                fill="#51E84F" />
+            <path
+                d="M405.479 64.7699C404.813 63.9715 403.749 63.9715 403.083 64.5038C402.285 65.1691 402.285 66.2337 402.817 66.899C403.483 67.6974 404.547 67.6974 405.212 67.1652C405.878 66.4998 406.011 65.4353 405.479 64.7699Z"
+                fill="#BCBCBC" />
+            <path
+                d="M399.889 64.77C399.623 64.3708 399.091 64.3708 398.692 64.6369C398.292 64.903 398.292 65.4353 398.559 65.8345C398.825 66.2337 399.357 66.2337 399.756 65.9676C400.155 65.7014 400.155 65.1692 399.889 64.77Z"
+                fill="#BCBCBC" />
+            <path
+                d="M139.209 57.185L147.592 63.4392L142.802 69.8265C141.072 72.2218 137.745 72.621 135.483 70.8911C133.088 69.1612 132.689 65.8345 134.419 63.5723L139.209 57.185Z"
+                fill="#0F171E" />
+            <path
+                d="M139.209 57.185L147.593 63.4392L145.73 65.8345C144 68.2297 140.673 68.6289 138.411 66.899C136.016 65.1691 135.617 61.8424 137.346 59.5803L139.209 57.185Z"
+                fill="#1E2831" />
+            <path
+                d="M170.207 49.5639C170.895 39.6664 163.429 31.0855 153.531 30.3979C143.634 29.7104 135.053 37.1765 134.365 47.0741C133.677 56.9717 141.144 65.5526 151.041 66.2401C160.939 66.9277 169.52 59.4615 170.207 49.5639Z"
+                fill="#583DCC" />
+            <path
+                d="M152.284 65.402C160.13 64.2019 165.518 56.8688 164.318 49.023C163.117 41.1771 155.784 35.7897 147.939 36.9898C140.093 38.1899 134.705 45.523 135.905 53.3689C137.105 61.2147 144.439 66.6021 152.284 65.402Z"
+                fill="#705ACB" />
+            <path
+                d="M140.806 55.7213C141.338 54.9229 141.205 53.8583 140.407 53.326C139.609 52.7938 138.544 52.9268 138.012 53.7253C137.479 54.5237 137.613 55.5882 138.411 56.1205C139.209 56.6528 140.274 56.5197 140.806 55.7213Z"
+                fill="#BCBCBC" />
+            <path
+                d="M139.342 50.3985C139.608 49.9993 139.608 49.4671 139.209 49.2009C138.81 48.9348 138.278 48.9348 138.012 49.334C137.746 49.7332 137.746 50.2655 138.145 50.5316C138.544 50.7977 139.076 50.6647 139.342 50.3985Z"
+                fill="#BCBCBC" />
+            <path
+                d="M306.875 94.8434L296.762 92.0489L298.891 84.331C299.689 81.5365 302.617 79.9397 305.411 80.7381C308.206 81.5365 309.802 84.464 309.004 87.2585L306.875 94.8434Z"
+                fill="#0F171E" />
+            <path
+                d="M306.875 94.8434L296.762 92.0489L297.56 89.1214C298.359 86.327 301.286 84.7302 304.08 85.5286C306.875 86.327 308.472 89.2545 307.673 92.0489L306.875 94.8434Z"
+                fill="#1E2831" />
+            <path
+                d="M315.628 110.32C317.066 100.504 310.274 91.3812 300.457 89.9436C290.641 88.5059 281.518 95.2981 280.081 105.114C278.643 114.931 285.435 124.054 295.251 125.491C305.068 126.929 314.191 120.137 315.628 110.32Z"
+                fill="#583DCC" />
+            <path
+                d="M305.138 117.198C312.256 113.687 315.18 105.07 311.669 97.9521C308.157 90.8341 299.54 87.9104 292.422 91.4218C285.304 94.9331 282.381 103.55 285.892 110.668C289.403 117.786 298.02 120.71 305.138 117.198Z"
+                fill="#705ACB" />
+            <path
+                d="M305.944 96.8394C305.677 97.7709 306.21 98.7024 307.141 98.9685C308.073 99.2346 309.004 98.7024 309.27 97.7709C309.536 96.8394 309.004 95.9079 308.073 95.6418C307.141 95.3756 306.21 95.9079 305.944 96.8394Z"
+                fill="#BCBCBC" />
+            <path
+                d="M309.138 101.364C309.005 101.763 309.271 102.295 309.67 102.428C310.07 102.561 310.602 102.295 310.735 101.896C310.868 101.497 310.602 100.965 310.203 100.831C309.803 100.698 309.271 100.831 309.138 101.364Z"
+                fill="#BCBCBC" />
+            <path
+                d="M483.724 67.9636L478.002 76.7461L471.349 72.3548C468.954 70.758 468.288 67.5644 469.885 65.1691C471.482 62.7739 474.675 62.1086 477.071 63.7054L483.724 67.9636Z"
+                fill="#0F171E" />
+            <path
+                d="M483.724 67.9636L478.002 76.7461L475.474 75.0162C473.079 73.4194 472.413 70.2257 474.01 67.8305C475.607 65.4353 478.8 64.7699 481.196 66.3668L483.724 67.9636Z"
+                fill="#1E2831" />
+            <path
+                d="M503.019 65.4353C511.402 70.8911 513.664 82.0688 508.209 90.3191C502.753 98.7024 491.575 100.965 483.325 95.5087C474.942 90.0529 472.679 78.8752 478.135 70.6249C483.591 62.3747 494.769 59.9795 503.019 65.4353Z"
+                fill="#583DCC" />
+            <path
+                d="M493.392 92.617C501.139 90.8883 506.017 83.2071 504.289 75.4605C502.56 67.7139 494.879 62.8354 487.132 64.5641C479.385 66.2928 474.507 73.9741 476.236 81.7207C477.964 89.4673 485.646 94.3457 493.392 92.617Z"
+                fill="#705ACB" />
+            <path
+                d="M485.321 69.5604C486.119 70.0926 487.184 69.8265 487.716 69.0281C488.248 68.2297 487.982 67.1652 487.184 66.6329C486.385 66.1006 485.321 66.3667 484.789 67.1652C484.256 67.9636 484.522 69.0281 485.321 69.5604Z"
+                fill="#BCBCBC" />
+            <path
+                d="M490.51 67.8305C490.909 68.0967 491.442 67.9636 491.708 67.5644C491.974 67.1652 491.841 66.6329 491.442 66.3668C491.042 66.1007 490.51 66.2337 490.244 66.6329C489.978 67.0321 490.111 67.5644 490.51 67.8305Z"
+                fill="#BCBCBC" />
+        </svg>
+    </div>-->
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" style="display: none;">
+        <div class="loading-animate-overlay">
+            <svg viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                </circle>
+            </svg>
+            <svg viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                </circle>
+            </svg>
+            <svg viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                </circle>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Home -->
+    <div id="home" class="content">
+        <!-- Title -->
+        <div class="title-frame">
+            <div class="title" data-lang="nav-home">Home</div>
+            <span class="title-line"></span>
+        </div>
+
+        <!-- User Name -->
+        <div class="user-name-frame">
+            <button class="button-style-user-name" id="user">
+                <div class="button-style-icon-user-name"></div>
+                <p class="button-style-text-user-name" id="username">{{ user_data.telegram_name }}</p> <!-- -->
+            </button>
+        </div>
+
+        <!-- Divider Text -->
+        <div class="divider-text-frame">
+            <span class="divider-text" data-lang="home-earn-overview">Earnings overview</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- Earn Frame -->
+        <div class="earn-frame">
+            <div class="earn-list">
+                <div class="balance-icon"></div>
+                <p data-lang="home-balance">Balance:</p>
+                <p><span class="highlight1 total-balance-class" id="total_balance">0.0</span> $NVRM</p>
+                <!-- Total Balance DB-->
+            </div>
+
+            <div class="earn-list">
+                <div class="profit-icon"></div>
+                <p data-lang="home-profit-day">Profit per day:</p>
+                <p><span class="highlight2" id="profit_per_day">0.000</span> $NVRM</p> <!-- profit per day -->
+            </div>
+
+            <div class="earn-list">
+                <div class="airdrop-icon"></div>
+                <p data-lang="home-airdrop">Airdrop:</p>
+                <p><span class="highlight3" id="airdrop_user_prcnt">+0.0%</span></p> <!-- % airdrop DB-->
+            </div>
+
+            <div class="earn-list">
+                <div class="boost-icon"></div>
+                <p data-lang="home-power">Power:</p>
+                <p><span class="highlight3" id="calc_power">+0.0%</span></p> <!-- % power DB-->
+            </div>
+        </div>
+
+        <!-- Divider Text -->
+        <div class="divider-text-frame">
+            <span class="divider-text" data-lang="home-list-friend">List of your friends</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- Friend Frame -->
+        <div class="friend-frame" id="friend-frame" style="display: none;"></div>
+
+        <!-- Empty Friend Frame -->
+        <div class="empty-friend-frame" id="empty-friend-frame">
+            <div class="image-desert"></div>
+            <h2 data-lang="home-nobody">There's nobody here</h2>
+            <button class="button-main" id="friend-home" data-lang="home-invite">Invite a Friend</button>
+        </div>
+
+        <!-- Modal Window -->
+        <div class="modal" id="modal-friend-home">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <div class="modal-friend"></div>
+                    <button id="close-modal-friend-home" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <h2 class="model-title-text"><span class="highlight1" data-lang="home-invite">Invite a Friend</span>
+                    </h2>
+                    <div class="button-frame-modal-friend-home">
+                        <div class="button-modal-friend-home">
+                            <button class="button-main-modal-friend-home" id="buttoninvitefriend"
+                                data-lang="home-invite-simple">Invite</button>
+                            <button class="button-copy" id="buttoncopyfriend"></button>
+                        </div>
+                        <div class="task-status-modal">
+                            <span class="task-prcnt"><span class="highlight1">+100</span></span>
+                            <span>$NRVM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earn -->
+    <div id="earn" class="content">
+        <!-- Title -->
+        <div class="title-frame">
+            <div class="title" data-lang="nav-earn">Earn</div>
+            <span class="title-line"></span>
+        </div>
+
+        <!-- Divider Text -->
+        <div class="divider-text-frame">
+            <span class="divider-text" data-lang="earn-basic-tasks">Basic tasks</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- Basic Tasks -->
+        <div class="task-frame">
+            <!-- Join Telegram -->
+            <button class="task" id="joinTG">
+                <div class="TG-icon"></div>
+                <p class="task-text" data-lang="earn-join-tg">Join TG</p>
+                <div class="task-status" id="task-status-tg">
+                    <span class="task-prcnt" id="jointgprcnt"><span class="highlight1">+33%</span></span>
+                    <span data-lang="airdrop">Airdrop</span>
+                </div>
+                <div class="task-icon-status" id="icon_status_tg" style="display: none;"></div>
+                <div class="processing" id="processing-tg" style="display: none;">
+                    <p data-lang="processing">Processing...</p>
+                </div>
+            </button>
+
+            <!-- Follow X -->
+            <button class="task" id="joinX">
+                <div class="X-icon"></div>
+                <p class="task-text" data-lang="earn-follow-x">Follow X</p>
+                <div class="task-status" id="task-status-x">
+                    <span class="task-prcnt" id="joinxprcnt"><span class="highlight2">+33%</span></span>
+                    <span data-lang="airdrop">Airdrop</span>
+                </div>
+                <div class="task-icon-status" id="icon_status_X" style="display: none;"></div>
+                <div class="processing" id="processing-x" style="display: none;">
+                    <p data-lang="processing">Processing...</p>
+                </div>
+            </button>
+
+            <!-- Follow TikTok -->
+            <button class="task" id="joinTikTok">
+                <div class="F-icon"></div>
+                <p class="task-text" data-lang="earn-follow-tiktok">Follow TikTok</p>
+                <div class="task-status" id="task-status-tiktok">
+                    <span class="task-prcnt" id="jointiktokprcnt"><span class="highlight3">+33%</span></span>
+                    <span data-lang="airdrop">Airdrop</span>
+                </div>
+                <div class="task-icon-status" id="icon_status_tiktok" style="display: none;"></div>
+                <div class="processing" id="processing-tiktok" style="display: none;">
+                    <p data-lang="processing">Processing...</p>
+                </div>
+            </button>
+
+            <!-- Invite a Friend -->
+            <button class="task" id="friend-earn">
+                <div class="friend-icon"></div>
+                <p class="task-text" data-lang="home-invite">Invite a Friend</p>
+                <div class="task-status">
+                    <span class="task-prcnt"><span class="highlight3">+100</span></span>
+                    <span>$NRVM</span>
+                </div>
+                <div class="task-icon-status" id="icon_status" style="display: none;"></div>
+            </button>
+        </div>
+
+        <!-- Divider Text -->
+        <div class="divider-text-frame">
+            <span class="divider-text" data-lang="earn-bonus-tasks">Bonus tasks</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- Bonus Tasks -->
+        <div class="task-frame">
+            <!-- Sponsored View -->
+            <button class="task" id="sponsoredview">
+                <div class="donut"></div>
+                <p class="task-text" data-lang="earn-sponsored">Sponsored View</p>
+                <div class="task-status" id="task_status_sponsored_view">
+                    <span class="task-prcnt-earn"><span class="highlight1">+38%</span></span>
+                    <span data-lang="power">Power</span>
+                </div>
+                <div class="task-icon-status" id="task_icon_status_sponsored_view" style="display: none;"></div>
+            </button>
+
+            <!-- Buy 100 $NVRM -->
+            <button class="task-buy" id="buy100">
+                <div class="coin100"></div>
+                <div class="task-text-buy">
+                    <p data-lang="buy">Buy</p>
+                    <p><span class="highlight2"> 100 </span> $NVRM</p>
+                </div>
+                <div class="task-status-buy" id="frame_status_buy100">
+                    <span class="task-prcnt"><span class="highlight2">+100%</span></span>
+                    <span data-lang="power">Power</span>
+                </div>
+                <div class="task-icon-status" id="icon_status_buy100" style="display: none;"></div>
+            </button>
+
+            <!-- Buy 1000 $NVRM -->
+            <button class="task-buy" id="buy1000">
+                <div class="coin1000"></div>
+                <div class="task-text-buy">
+                    <p data-lang="buy">Buy</p>
+                    <p><span class="highlight3"> 1000 </span> $NVRM</p>
+                </div>
+                <div class="task-status-buy" id="frame_status_buy1000">
+                    <span class="task-prcnt"><span class="highlight3">+1000%</span></span>
+                    <span data-lang="power">Power</span>
+                </div>
+                <div class="task-icon-status" id="icon_status_buy1000" style="display: none;"></div>
+            </button>
+
+            <!-- Coming Soon -->
+            <button class="task">
+                <div class="friend-icon" style="display: none;"></div>
+                <p class="task-text" style="font-weight: 400; font-size: 18px; padding-left: 30px;"
+                    data-lang="earn-soon">Coming soon...</p>
+                <div class="task-status">
+                    <span class="task-prcnt"><span class="highlight3">+100%</span></span>
+                    <span data-lang="airdrop">Airdrop</span>
+                </div>
+                <div class="task-icon-status" id="icon_status" style="display: none;"></div>
+            </button>
+        </div>
+
+        <!-- Modal Windows -->
+        <!-- TG -->
+        <div class="modal" id="modal-TG">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <div class="modal-TG-icon"></div>
+                    <button id="close-modal-TG" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <h2 class="model-title-text"><span class="highlight1" data-lang="join-tg-channel">Join our
+                            TG channel</span>
+                    </h2>
+                    <div class="button-frame-modal">
+                        <button class="button-main" id="buttonjoinTG" data-lang="join">Join</button>
+                        <div class="task-status-modal">
+                            <span class="task-prcnt"><span class="highlight1">+33%</span></span>
+                            <span data-lang="airdrop">Airdrop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- X -->
+        <div class="modal" id="modal-X">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <div class="modal-X-icon"></div>
+                    <button id="close-modal-X" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <h2 class="model-title-text"><span class="highlight2" data-lang="join-x-follow">Follow our
+                            X account</span></span>
+                    </h2>
+                    <div class="button-frame-modal">
+                        <button class="button-main" id="buttonjoinX" data-lang="follow">Follow</button>
+                        <div class="task-status-modal">
+                            <span class="task-prcnt"><span class="highlight2">+33%</span></span>
+                            <span data-lang="airdrop">Airdrop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TikTok -->
+        <div class="modal" id="modal-TikTok">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <div class="modal-F-icon"></div>
+                    <button id="close-modal-TikTok" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <h2 class="model-title-text"><span class="highlight3" data-lang="join-tiktok-follow">Follow us on
+                            TikTok</span>
+                    </h2>
+                    <div class="button-frame-modal">
+                        <button class="button-main" id="buttonjoinTikTok" data-lang="follow">Follow</button>
+                        <div class="task-status-modal">
+                            <span class="task-prcnt"><span class="highlight3">+33%</span></span>
+                            <span data-lang="airdrop">Airdrop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invite a Friend -->
+        <div class="modal" id="modal-friend-earn">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <div class="modal-friend"></div>
+                    <button id="close-modal-friend-earn" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <h2 class="model-title-text"><span class="highlight1" data-lang="home-invite">Invite a Friend</span>
+                    </h2>
+                    <div class="button-frame-modal-friend-earn">
+                        <div class="button-modal-friend-earn">
+                            <button class="button-main-modal-friend-earn" id="buttoninvitefriendearn"
+                                data-lang="home-invite-simple">Invite</button>
+                            <button class="button-copy" id="buttoncopyfriendearn"></button>
+                        </div>
+                        <div class="task-status-modal">
+                            <span class="task-prcnt"><span class="highlight1">+100</span></span>
+                            <span>$NRVM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sponsored View -->
+        <div class="modal" id="modal_sponsor">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header" id="modal_heder_sponsored">
+                    <span id="timer" class="timer-text">00:00</span>
+                    <button id="close_modal_sponsor" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <div class="modal-loading-animate" id="modal_loading_animate_content" style="display: none;">
+                        <div class="loading-animate-overlay">
+                            <svg viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                                </circle>
+                            </svg>
+                            <svg viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                                </circle>
+                            </svg>
+                            <svg viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                                </circle>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="adbanner" id="adbanner"></div>
+
+                    <div class="modal-succes-content" id="modal_succes_content" style="display: none;">
+                        <h2 class="model-title-text"><span class="highlight1" data-lang="earn-sponsored">Sponsored
+                                View</span>
+                        </h2>
+                        <div class="big-check"></div>
+                        <div class="button-frame-modal">
+                            <button class="button-main" id="button_sponsor_OK" data-lang="OK">OK</button>
+                            <div class="task-status-modal">
+                                <span class="task-prcnt"><span class="highlight1">+38%</span></span>
+                                <span data-lang="power">Power</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buy 100 $NVRM -->
+        <div class="modal" id="modal_buy100_window">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header" id="modal_header_buy100">
+                    <div class="task-text-buy-modal">
+                        <p id="modal_header_p_buy100" data-lang="buy">Buy </p>
+                        <p id="modal_header_p2_buy100"><span class="highlight2"> 100 </span> $NVRM</p>
+                        <p id="modal_header_processing_buy100" style="display: none;" data-lang="processing"></p>
+                    </div>
+                    <button id="modal_buy100_close_button" class="close-modal">&times;</button>
+                </div>
+
+                <div class="modal-message">
+                    <div class="modal-message-main-content" id="modal_main_content_buy100">
+                        <div class="vaucher100-image"></div>
+                        <p><span id="vaucher100_price"></span></p>
+                        <button class="button-vaucher disabled" id="button_voucher_buy100" data-lang="buy_now"
+                            disabled>Buy Now</button>
+                        <h3 data-lang="vaucher_lang">Power is valid for 24 hours from the moment of purchase</h3>
+                    </div>
+
+                    <div class="modal-message-processing-content" id="modal_processing_content_buy100"
+                        style="display: none;">
+                        <svg class="machine" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 645 526">
+                            <defs />
+                            <g>
+                                <path x="-173,694" y="-173,694" class="large-shadow"
+                                    d="M645 194v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L602 68l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L482 10h-21l-4 29c-10 1-19 3-28 6l-14-25 -19 8 7 28c-8 5-16 10-24 16l-23-17L341 68l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L645 194zM471 294c-61 0-110-49-110-110S411 74 471 74s110 49 110 110S532 294 471 294z" />
+                            </g>
+                            <g>
+                                <path x="-136,996" y="-136,996" class="medium-shadow"
+                                    d="M402 400v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L352 323c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L402 400zM265 463c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C338 430 305 463 265 463z" />
+                            </g>
+                            <g>
+                                <path x="-173,694" y="-173,694" class="large"
+                                    d="M635 184v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L592 58l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L472 0h-21l-4 29c-10 1-19 3-28 6L405 9l-19 8 7 28c-8 5-16 10-24 16l-23-17L331 58l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L635 184zM461 284c-61 0-110-49-110-110S401 64 461 64s110 49 110 110S522 284 461 284z" />
+                            </g>
+                            <g>
+                                <path x="-136,996" y="-136,996" class="medium"
+                                    d="M392 390v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L342 313c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L392 390zM255 453c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C328 420 295 453 255 453z" />
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="modal-message-end-content" id="modal_succes_content_buy100" style="display: none;">
+                        <h2 data-lang="miner-success">Success</h2>
+                        <div class="big-check"></div>
+                        <button class="button-main" id="button_confirm_buy100" data-lang="OK">OK</button>
+                    </div>
+
+                    <div class="modal-message-error-content" id="modal_error_content_buy100" style="display: none;">
+                        <div class="big-error-check"></div>
+                        <button class="button-withdrawal" id="button_error_buy100" data-lang="OK">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buy 1000 $NVRM -->
+        <div class="modal" id="modal_buy1000_window">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header" id="modal_header_buy1000">
+                    <div class="task-text-buy-modal">
+                        <p id="modal_header_p_buy1000" data-lang="buy">Buy </p>
+                        <p id="modal_header_p2_buy1000"><span class="highlight3"> 1000 </span> $NVRM</p>
+                        <p id="modal_header_processing_buy1000" style="display: none;" data-lang="processing"></p>
+                    </div>
+                    <button id="modal_buy1000_close_button" class="close-modal">&times;</button>
+                </div>
+
+                <div class="modal-message">
+                    <div class="modal-message-main-content" id="modal_main_content_buy1000">
+                        <div class="vaucher1000-image"></div>
+                        <p><span id="vaucher1000_price"></span></p>
+                        <button class="button-vaucher disabled" id="button_voucher_buy1000" data-lang="buy_now"
+                            disabled>Buy Now</button>
+                        <h3 data-lang="vaucher_lang">Power is valid for 24 hours from the moment of purchase</h3>
+                    </div>
+
+                    <div class="modal-message-processing-content" id="modal_processing_content_buy1000"
+                        style="display: none;">
+                        <svg class="machine" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 645 526">
+                            <defs />
+                            <g>
+                                <path x="-173,694" y="-173,694" class="large-shadow"
+                                    d="M645 194v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L602 68l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L482 10h-21l-4 29c-10 1-19 3-28 6l-14-25 -19 8 7 28c-8 5-16 10-24 16l-23-17L341 68l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L645 194zM471 294c-61 0-110-49-110-110S411 74 471 74s110 49 110 110S532 294 471 294z" />
+                            </g>
+                            <g>
+                                <path x="-136,996" y="-136,996" class="medium-shadow"
+                                    d="M402 400v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L352 323c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L402 400zM265 463c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C338 430 305 463 265 463z" />
+                            </g>
+                            <g>
+                                <path x="-173,694" y="-173,694" class="large"
+                                    d="M635 184v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L592 58l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L472 0h-21l-4 29c-10 1-19 3-28 6L405 9l-19 8 7 28c-8 5-16 10-24 16l-23-17L331 58l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L635 184zM461 284c-61 0-110-49-110-110S401 64 461 64s110 49 110 110S522 284 461 284z" />
+                            </g>
+                            <g>
+                                <path x="-136,996" y="-136,996" class="medium"
+                                    d="M392 390v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L342 313c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L392 390zM255 453c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C328 420 295 453 255 453z" />
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="modal-message-end-content" id="modal_succes_content_buy1000" style="display: none;">
+                        <h2 data-lang="miner-success">Success</h2>
+                        <div class="big-check"></div>
+                        <button class="button-main" id="button_confirm_buy1000" data-lang="OK">OK</button>
+                    </div>
+
+                    <div class="modal-message-error-content" id="modal_error_content_buy1000" style="display: none;">
+                        <div class="big-error-check"></div>
+                        <button class="button-withdrawal" id="button_error_buy1000" data-lang="OK">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Miner -->
+    <div id="miner" class="content">
+        <!-- Title -->
+        <div class="title-frame">
+            <div class="title" data-lang="nav-miner">Miner</div>
+            <span class="title-line"></span>
+        </div>
+
+        <!-- NVRM Frame -->
+        <div class="NVRM-frame">
+            <div class="background"></div>
+            <div class="balance-coin"></div>
+            <div class="balance-conteiner">
+                <h2 class="balance calc-mining-class" id="calc_mining_miner">0.000</h2>
+                <h2 class="day" data-lang="miner-per-day">$NVRM/per day</h2>
+            </div>
+        </div>
+
+        <!-- Calculating -->
+        <div class="calculating">
+            <div class="networkload">
+                <p class="load" data-lang="miner-load">Network load:</p>
+                <p class="calc" id="network-load-text">0%</p>
+            </div>
+            <div class="calchour">
+                <p class="load" data-lang="miner-calculating">Calculating:</p>
+                <p class="calc" id="nvrm-per-hour">0.000</p>
+                <p class="calc" id="nvrm-per-hour-text" data-lang="miner-per-hour"> $NVRM/per hour</p>
+            </div>
+            <div class="power">
+                <p class="load" data-lang="miner-curr-power">Current power:</p>
+                <p class="calc" id="calc_power">0.0%</p>
+            </div>
+        </div>
+
+        <!-- Fire Frame -->
+        <div class="fire-frame">
+            <div class="outer-circle"></div>
+            <div class="inner-circle">
+                <div id="center-image" alt="Fire" class="fire-button"></div>
+                <div id="loading-block" style="display: none;">
+                    <div class="loading-text">
+                        <p class="load-text" data-lang="miner-verifying-node">Verifying node...</p>
+                        <p class="calc-standart" data-lang="miner-success">Success</p>
+                    </div>
+                    <div class="loading-text">
+                        <p class="load-text" data-lang="miner-node-access">Node access:</p>
+                        <p class="calc-accent" id="progress1">0%</p> <span class="miner-complete-word"
+                            data-lang="miner-complete">complete</span>
+                    </div>
+                    <div class="loading-text">
+                        <p class="load-text" data-lang="miner-load">Network load:</p>
+                        <p class="calc-accent" id="progress2">0%</p>
+                    </div>
+                    <div class="loading-text">
+                        <p class="load-text" data-lang="miner-difficuly-level">Difficulty level...</p>
+                        <p class="calc-standart" data-lang="miner-optimal">Optimal</p>
+                    </div>
+                    <div class="loading-text">
+                        <p class="load-text" data-lang="miner-working"> Working miner...</p>
+                        <p class="calc-standart" data-lang="miner-start">Start</p>
+                    </div>
+                </div>
+
+                <div class="loading-animate" style="display: none;">
+                    <svg viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                        </circle>
+                    </svg>
+                    <svg viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                        </circle>
+                    </svg>
+                    <svg viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                        </circle>
+                    </svg>
+                </div>
+
+                <div style="display: none;" id="stop-image" alt="Stop" class="stop-button"></div>
+            </div>
+        </div>
+
+        <!-- Tap to Start -->
+        <h2 class="tapstart" data-lang=""></h2>
+
+        <!-- Down Frame -->
+        <div class="down-frame">
+            <div class="question"></div>
+            <div class="boost"></div>
+        </div>
+
+        <!-- Modal Windows -->
+        <!-- Modal Instruction -->
+        <div class="modal" id="modal-instruction">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <h2 data-lang="usage-instruction">Usage Instruction</h2>
+                    <button id="close-modal-instruction" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message-instruction">
+                    <p data-lang="p1">To activate the <span class="highlight1">Nivarium</span> miner, press the start
+                        button
+                    <div alt="Fire" class="inline-image-fire"></div>
+                    </p>
+                    <p data-lang="p2">Wait for the miner to initialize and load.</p>
+                    <p data-lang="p3">You will receive a notification once it has successfully started.</p>
+                    <p data-lang="p4">The screen will display key metrics, including network load, the estimated amount
+                        of currency
+                        mined per hour, and your activated boosters.</p>
+                    <p data-lang="p5"><span class="highlight2">Important:</span> These metrics may change depending on
+                        network load.
+                        You can stop the miner at any time using the stop button
+                    <div alt="Power" class="inline-image-power"></div>
+                    </p>
+                    <p data-lang="p6">Be sure to monitor the <span class="highlight1">Nivarium</span> miner's
+                        performance.</p>
+                    <p data-lang="p7">Due to high network traffic, mining may occasionally stop, and in such cases, a
+                        manual restart
+                        may be required.</p>
+                    <p data-lang="p8">By default, payouts occur every 3 hours (this value may vary).</p>
+                    <p data-lang="p9">The miner does not affect the performance of other applications and will not
+                        interfere with the
+                        overall operation of your device.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Boost -->
+        <div class="modal" id="modal-boost">
+            <div class="modal-content" id="modal-content-boost">
+                <div class="modal-header">
+                    <h2 data-lang="boost-miner-modal">Boost</h2>
+                    <button id="close-modal-boost" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <!-- Bonus Tasks -->
+                    <div class="task-frame">
+                        <!-- Sponsored View -->
+                        <button class="task" id="sponsoredview_boost">
+                            <div class="donut"></div>
+                            <p class="task-text" data-lang="earn-sponsored">Sponsored View</p>
+                            <div class="task-status" id="task_status_sponsored_view_boost">
+                                <span class="task-prcnt-earn"><span class="highlight1">+38%</span></span>
+                                <span data-lang="power">Power</span>
+                            </div>
+                            <div class="task-icon-status" id="task_icon_status_sponsored_view_boost"
+                                style="display: none;">
+                            </div>
+                        </button>
+
+                        <!-- Buy 100 $NVRM -->
+                        <button class="task-buy" id="buy100_boost">
+                            <div class="coin100"></div>
+                            <div class="task-text-buy">
+                                <p data-lang="buy">Buy</p>
+                                <p><span class="highlight2"> 100 </span> $NVRM</p>
+                            </div>
+                            <div class="task-status-buy" id="frame_status_buy100_boost">
+                                <span class="task-prcnt"><span class="highlight2">+100%</span></span>
+                                <span data-lang="power">Power</span>
+                            </div>
+                            <div class="task-icon-status" id="icon_status_buy100_boost" style="display: none;">
+                            </div>
+                        </button>
+
+                        <!-- Buy 1000 $NVRM -->
+                        <button class="task-buy" id="buy1000_boost">
+                            <div class="coin1000"></div>
+                            <div class="task-text-buy">
+                                <p data-lang="buy">Buy</p>
+                                <p><span class="highlight3"> 1000 </span> $NVRM</p>
+                            </div>
+                            <div class="task-status-buy" id="frame_status_buy1000_boost">
+                                <span class="task-prcnt"><span class="highlight3">+1000%</span></span>
+                                <span data-lang="power">Power</span>
+                            </div>
+                            <div class="task-icon-status" id="icon_status_buy1000_boost" style="display: none;">
+                            </div>
+                        </button>
+
+                        <!-- Coming Soon -->
+                        <button class="task">
+                            <div class="friend-icon" style="display: none;"></div>
+                            <p class="task-text" style="font-weight: 400; font-size: 18px; padding-left: 30px;"
+                                data-lang="earn-soon">Coming soon...</p>
+                            <div class="task-status">
+                                <span class="task-prcnt"><span class="highlight3">+100%</span></span>
+                                <span data-lang="airdrop">Airdrop</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sponsored View -->
+        <div class="modal" id="modal_sponsor_boost">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header" id="modal_heder_sponsored_boost">
+                    <span id="timer_boost" class="timer-text">00:00</span>
+                    <button id="close_modal_sponsor_boost" class="close-modal">&times;</button>
+                </div>
+
+                <div class="modal-message">
+                    <div class="modal-loading-animate" id="modal_loading_animate_content" style="display: none;">
+                        <div class="loading-animate-overlay">
+                            <svg viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                                </circle>
+                            </svg>
+                            <svg viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                                </circle>
+                            </svg>
+                            <svg viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;">
+                                </circle>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="adbanner" id="adbanner_boost"></div>
+
+                    <div class="modal-succes-content" id="modal_succes_content_boost" style="display: none;">
+                        <h2 class="model-title-text"><span class="highlight1" data-lang="earn-sponsored">Sponsored
+                                View</span>
+                        </h2>
+                        <div class="big-check"></div>
+                        <div class="button-frame-modal">
+                            <button class="button-main" id="button_sponsor_OK_boost" data-lang="OK">OK</button>
+                            <div class="task-status-modal">
+                                <span class="task-prcnt"><span class="highlight1">+38%</span></span>
+                                <span data-lang="power">Power</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buy 100 $NVRM -->
+        <div class="modal" id="modal_buy100_window_boost">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header" id="modal_header_buy100_boost">
+                    <div class="task-text-buy-modal">
+                        <p id="modal_header_p_buy100_boost" data-lang="buy">Buy </p>
+                        <p id="modal_header_p2_buy100_boost"><span class="highlight2"> 100 </span> $NVRM</p>
+                        <p id="modal_header_processing_buy100_boost" style="display: none;" data-lang="processing"></p>
+                    </div>
+                    <button id="modal_buy100_close_button_boost" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <div class="modal-message-main-content" id="modal_main_content_buy100_boost">
+                        <div class="vaucher100-image"></div>
+                        <p><span id="vaucher100_price_boost"></span></p>
+                        <button class="button-vaucher disabled" id="button_voucher_buy100_boost" data-lang="buy_now"
+                            disabled>Buy
+                            Now</button>
+                        <h3 data-lang="vaucher_lang">Power is valid for 24 hours from the moment of purchase</h3>
+                    </div>
+
+                    <div class="modal-message-processing-content" id="modal_processing_content_buy100_boost"
+                        style="display: none;">
+                        <svg class="machine" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 645 526">
+                            <defs />
+                            <g>
+                                <path x="-173,694" y="-173,694" class="large-shadow"
+                                    d="M645 194v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L602 68l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L482 10h-21l-4 29c-10 1-19 3-28 6l-14-25 -19 8 7 28c-8 5-16 10-24 16l-23-17L341 68l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L645 194zM471 294c-61 0-110-49-110-110S411 74 471 74s110 49 110 110S532 294 471 294z" />
+                            </g>
+                            <g>
+                                <path x="-136,996" y="-136,996" class="medium-shadow"
+                                    d="M402 400v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L352 323c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L402 400zM265 463c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C338 430 305 463 265 463z" />
+                            </g>
+                            <g>
+                                <path x="-173,694" y="-173,694" class="large"
+                                    d="M635 184v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L592 58l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L472 0h-21l-4 29c-10 1-19 3-28 6L405 9l-19 8 7 28c-8 5-16 10-24 16l-23-17L331 58l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L635 184zM461 284c-61 0-110-49-110-110S401 64 461 64s110 49 110 110S522 284 461 284z" />
+                            </g>
+                            <g>
+                                <path x="-136,996" y="-136,996" class="medium"
+                                    d="M392 390v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L342 313c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L392 390zM255 453c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C328 420 295 453 255 453z" />
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="modal-message-end-content" id="modal_succes_content_buy100_boost"
+                        style="display: none;">
+                        <h2 data-lang="miner-success">Success</h2>
+                        <div class="big-check"></div>
+                        <button class="button-main" id="button_confirm_buy100_boost" data-lang="OK">OK</button>
+                    </div>
+
+                    <div class="modal-message-error-content" id="modal_error_content_buy100_boost"
+                        style="display: none;">
+                        <div class="big-error-check"></div>
+                        <button class="button-withdrawal" id="button_error_buy100_boost" data-lang="OK">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buy 1000 $NVRM -->
+        <div class="modal" id="modal_buy1000_window_boost">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header" id="modal_header_buy1000_boost">
+                    <div class="task-text-buy-modal">
+                        <p id="modal_header_p_buy1000_boost" data-lang="buy">Buy </p>
+                        <p id="modal_header_p2_buy1000_boost"><span class="highlight3"> 1000 </span> $NVRM</p>
+                        <p id="modal_header_processing_buy1000_boost" style="display: none;" data-lang="processing"></p>
+                    </div>
+                    <button id="modal_buy1000_close_button_boost" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <div class="modal-message-main-content" id="modal_main_content_buy1000_boost">
+                        <div class="vaucher1000-image"></div>
+                        <p><span id="vaucher1000_price_boost"></span></p>
+                        <button class="button-vaucher disabled" id="button_voucher_buy1000_boost" data-lang="buy_now"
+                            disabled>Buy Now</button>
+                        <h3 data-lang="vaucher_lang">Power is valid for 24 hours from the moment of purchase</h3>
+                    </div>
+
+                    <div class="modal-message-processing-content" id="modal_processing_content_buy1000_boost"
+                        style="display: none;">
+                        <svg class="machine" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 645 526">
+                            <defs />
+                            <g>
+                                <path x="-173,694" y="-173,694" class="large-shadow"
+                                    d="M645 194v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L602 68l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L482 10h-21l-4 29c-10 1-19 3-28 6l-14-25 -19 8 7 28c-8 5-16 10-24 16l-23-17L341 68l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L645 194zM471 294c-61 0-110-49-110-110S411 74 471 74s110 49 110 110S532 294 471 294z" />
+                            </g>
+                            <g>
+                                <path x="-136,996" y="-136,996" class="medium-shadow"
+                                    d="M402 400v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L352 323c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L402 400zM265 463c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C338 430 305 463 265 463z" />
+                            </g>
+                            <g>
+                                <path x="-173,694" y="-173,694" class="large"
+                                    d="M635 184v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L592 58l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L472 0h-21l-4 29c-10 1-19 3-28 6L405 9l-19 8 7 28c-8 5-16 10-24 16l-23-17L331 58l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L635 184zM461 284c-61 0-110-49-110-110S401 64 461 64s110 49 110 110S522 284 461 284z" />
+                            </g>
+                            <g>
+                                <path x="-136,996" y="-136,996" class="medium"
+                                    d="M392 390v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L342 313c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L392 390zM255 453c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C328 420 295 453 255 453z" />
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="modal-message-end-content" id="modal_succes_content_buy1000_boost"
+                        style="display: none;">
+                        <h2 data-lang="miner-success">Success</h2>
+                        <div class="big-check"></div>
+                        <button class="button-main" id="button_confirm_buy1000_boost" data-lang="OK">OK</button>
+                    </div>
+
+                    <div class="modal-message-error-content" id="modal_error_content_buy1000_boost"
+                        style="display: none;">
+                        <div class="big-error-check"></div>
+                        <button class="button-withdrawal" id="button_error_buy1000_boost" data-lang="OK">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wallet -->
+    <div id="wallet" class="content">
+        <!-- Title -->
+        <div class="title-frame">
+            <div class="title" data-lang="nav-wallet">Wallet</div>
+            <span class="title-line"></span>
+        </div>
+
+        <!-- Divider Text -->
+        <div class="divider-text-frame">
+            <span class="divider-text" data-lang="wallet-total-balance">Total balance</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- Balance Frame -->
+        <div class="balance-frame-wallet">
+            <div class="balance-icon-wallet"></div>
+            <h2 class="total-balance-class" id="total_balance">0.000</h2>
+        </div>
+
+        <!-- Divider Text -->
+        <div class="divider-text-frame">
+            <span class="divider-text" data-lang="home-earn-overview">Earnings overview</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- Earn Frame -->
+        <div class="earn-frame-wallet">
+            <div class="earn-list-wallet">
+                <div class="wallet-earn-icon wallet-icon-earn"></div>
+                <p data-lang="wallet-mining">Mining:</p>
+                <p class="calc-mining-class" id="calc_mining">0.000</p>
+                <h5 id="prcnt_mining">+0.0%</h5>
+            </div>
+
+            <div class="earn-list-wallet">
+                <div class="wallet-earn-icon airdrop-icon-earn"></div>
+                <p data-lang="home-airdrop">Airdrop:</p>
+                <p><span class="highlight2" id="calc_airdrop">0.000</span></p>
+                <h5 id="prcnt_airdrop">+0.0%</h5>
+            </div>
+        </div>
+
+        <div class="wallet-button-block">
+            <button class="button-buy-wallet" data-lang="wallet-buy" id="buynivariumbutton">Buy Nivarium</button>
+            <button class="button-withdrawal-wallet" data-lang="wallet-withdrawal"
+                id="withdrawalnivariumbutton">Withdrawal</button>
+        </div>
+
+        <div id="tonconnect-connect-button"></div>
+
+        <button class="button-airdrop-wallet" data-lang="airdrop" id="airdropnivariumbutton">Airdrop</button>
+
+        <!-- Image -->
+        <div class="image-wallet"></div>
+
+        <!-- Modal Window -->
+        <!-- Buy Nivarium -->
+        <div class="modal" id="modal-buynivarium">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header" id="modal-header-buy-nivarium">
+                    <div class="task-text-buy-modal" id="task-text-buy-modal-buy-nivarium">
+                        <p data-lang="buy">Buy </p>
+                        <p><span class="highlight1">$NVRM</span></p>
+                    </div>
+                    <button id="close-modal-buynivarium" class="close-modal">&times;</button>
+                </div>
+
+                <div class="modal-message-main-content" id="modal-message-main-content-buy-nivarium">
+                    <div class="prices-frame">
+                        <div class="price-block">
+                            <p>1 $NVRM ≈ </p>
+                            <p id="nvrmprice"> 0.00</p>
+                        </div>
+                        <div class="price-block">
+                            <p>1 TON ≈ </p>
+                            <p id="tonprice"> 0.00</p>
+                        </div>
+                    </div>
+
+                    <div class="input-frame">
+                        <div class="input-pay">
+                            <p data-lang="you_pay">You pay:</p>
+                            <div class="input-presale">
+                                <span></span><span></span><span></span><span></span>
+                                <input type="number" id="amount-pay" placeholder="0.05">
+                                <span class="formatted-display"></span>
+                                <div class="input-coin-ton"></div>
+                            </div>
+                        </div>
+
+                        <div class="input-receive">
+                            <p data-lang="you_receive">You will receive:</p>
+                            <div class="input-presale">
+                                <span></span><span></span><span></span><span></span>
+                                <input type="number" id="amount-receive" placeholder="0">
+                                <span class="formatted-display"></span>
+                                <div class="input-coin-nivarium"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-checkbox">
+                        <input type="checkbox" id="terms-checkbox">
+
+                        <label for="terms-checkbox">
+                            <span data-lang="agree_check">I agree to the</span>
+                            <a href="https://web.com/pages/privacy-policy.html" target="_blank"
+                                data-lang="task-text-setting-terms">Privacy Policy</a>
+                            <span data-lang="and">and</span>
+                            <a href="https://web.com/pages/term-of-service.html" target="_blank"
+                                data-lang="task-text-setting-policy">Terms of Service</a>
+                        </label>
+                    </div>
+
+                    <button class="button-confirm-buy disabled" id="buttonwalletbuy" data-lang="buy_now" disabled>Buy
+                        Now</button>
+                </div>
+
+                <div class="modal-message-end-content" id="successMessageVisiblebuy" style="display: none;">
+                    <h2 data-lang="miner-success">Success</h2>
+                    <div class="big-check"></div>
+                    <button class="button-main" id="buttonOKbuynivarium" data-lang="OK">OK</button>
+                </div>
+
+                <div class="modal-message-processing-content" id="modal_processing_buy_wallet" style="display: none;">
+                    <svg class="machine" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 645 526">
+                        <defs />
+                        <g>
+                            <path x="-173,694" y="-173,694" class="large-shadow"
+                                d="M645 194v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L602 68l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L482 10h-21l-4 29c-10 1-19 3-28 6l-14-25 -19 8 7 28c-8 5-16 10-24 16l-23-17L341 68l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L645 194zM471 294c-61 0-110-49-110-110S411 74 471 74s110 49 110 110S532 294 471 294z" />
+                        </g>
+                        <g>
+                            <path x="-136,996" y="-136,996" class="medium-shadow"
+                                d="M402 400v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L352 323c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L402 400zM265 463c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C338 430 305 463 265 463z" />
+                        </g>
+                        <g>
+                            <path x="-173,694" y="-173,694" class="large"
+                                d="M635 184v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L592 58l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L472 0h-21l-4 29c-10 1-19 3-28 6L405 9l-19 8 7 28c-8 5-16 10-24 16l-23-17L331 58l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L635 184zM461 284c-61 0-110-49-110-110S401 64 461 64s110 49 110 110S522 284 461 284z" />
+                        </g>
+                        <g>
+                            <path x="-136,996" y="-136,996" class="medium"
+                                d="M392 390v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L342 313c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L392 390zM255 453c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C328 420 295 453 255 453z" />
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="modal-message-error-content" id="modal_error_content_buy_wallet" style="display: none;">
+                    <div class="big-error-check"></div>
+                    <button class="button-withdrawal" id="button_error_buy_wallet" data-lang="OK">OK</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Withdrawal Nivarium -->
+        <div class="modal modal-withdrawal" id="modal-withdrawal-nivarium">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header" id="modal-header-withdrawal-nivarium">
+                    <div class="task-text-withdrawal-modal" id="task-text-buy-modal-buy-nivarium">
+                        <p data-lang="wallet-withdrawal">Withdrawal </p>
+                        <p><span class="highlight2">$NVRM</span></p>
+                    </div>
+                    <button id="close-modal-withdrawalnivarium" class="close-modal">&times;</button>
+                </div>
+
+                <div class="modal-message-main-content-withdrawal" id="modal-message-main-content-withdrawal-nivarium">
+                    <h1 id="withdrawal-amount">0.00</h1>
+
+                    <div class="input-withdrawal">
+                        <p data-lang="you_withdrawal">You withdrawal:</p>
+                        <div class="input-nivarium-withdrawal">
+                            <span></span><span></span><span></span><span></span>
+                            <input type="number" id="amount-withdrawal" placeholder="100">
+                            <span class="formatted-display"></span>
+                            <div class="input-coin-nivarium-withdrawal"></div>
+                        </div>
+                    </div>
+                    <p>min: 100 $NVRM</p>
+                    <button class="button-withdrawal-confirm" data-lang="wallet-withdrawal"
+                        id="buttonwithdrawalconfirm">Withdrawal</button>
+
+                    <h3 data-lang="warning_011_ton">Warning! You must have at least 0.11 TON to cover the transaction
+                        fee.</h3>
+                </div>
+
+                <div class="modal-message-processing-content" id="modal_processing_withdrawal" style="display: none;">
+                    <svg class="machine machine-withdrawal" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                        viewBox="0 0 645 526">
+                        <defs />
+                        <g>
+                            <path x="-173,694" y="-173,694" class="large-shadow"
+                                d="M645 194v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L602 68l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L482 10h-21l-4 29c-10 1-19 3-28 6l-14-25 -19 8 7 28c-8 5-16 10-24 16l-23-17L341 68l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L645 194zM471 294c-61 0-110-49-110-110S411 74 471 74s110 49 110 110S532 294 471 294z" />
+                        </g>
+                        <g>
+                            <path x="-136,996" y="-136,996" class="medium-shadow"
+                                d="M402 400v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L352 323c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L402 400zM265 463c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C338 430 305 463 265 463z" />
+                        </g>
+                        <g>
+                            <path x="-173,694" y="-173,694" class="large"
+                                d="M635 184v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L592 58l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L472 0h-21l-4 29c-10 1-19 3-28 6L405 9l-19 8 7 28c-8 5-16 10-24 16l-23-17L331 58l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L635 184zM461 284c-61 0-110-49-110-110S401 64 461 64s110 49 110 110S522 284 461 284z" />
+                        </g>
+                        <g>
+                            <path x="-136,996" y="-136,996" class="medium"
+                                d="M392 390v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L342 313c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L392 390zM255 453c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C328 420 295 453 255 453z" />
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="modal-message-end-content" id="successMessageVisibleWithdrawal" style="display: none;">
+                    <h2 data-lang="miner-success">Success</h2>
+                    <div class="big-check"></div>
+                    <button class="button-main" id="buttonOKwithdrawalnivarium" data-lang="OK">OK</button>
+                </div>
+
+                <div class="modal-message-error-content" id="modal_error_content_wallet_withdrawal"
+                    style="display: none;">
+                    <div class="big-error-check"></div>
+                    <button class="button-withdrawal" id="button_error_wallet_withdrawal" data-lang="OK">OK</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Airdrop Nivarium -->
+        <div class="modal modal-airdrop" id="modal-airdrop-nivarium">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header" id="modal-header-airdrop-nivarium">
+                    <div class="task-text-airdrop-modal">
+                        <p data-lang="airdrop">Airdrop</p>
+                    </div>
+                    <button id="close-modal-airdrop" class="close-modal">&times;</button>
+                </div>
+
+                <div class="modal-message-main-content-airdrop" id="modal-message-main-content-airdrop-nivarium">
+                    <div class="amount-prcnt-frame">
+                        <h1 id="airdrop-amount">0.00</h1>
+                        <h4 id="airdrop_prcnt_id">0%</h4>
+                    </div>
+
+                    <div class="airdrop-task-items">
+                        <div class="airdrop-task-list task1">
+                            <div class="TG-icon"></div>
+                            <p class="task-text" data-lang="earn-join-tg">Join TG</p>
+                            <div class="airdrop-list-status">
+                                <div class="airdrop-list-icon" id="check_tg_icon"></div>
+                                <div class="airdrop-list-circle" id="check_tg_circle"></div>
+                            </div>                         
+                        </div>
+
+                        <div class="airdrop-task-list task2">
+                            <div class="X-icon"></div>
+                            <p class="task-text" data-lang="earn-follow-x">Follow X</p>
+                            <div class="airdrop-list-status">
+                                <div class="airdrop-list-icon" id="check_x_icon"></div>
+                                <div class="airdrop-list-circle" id="check_x_circle"></div>
+                            </div>                         
+                        </div>
+
+                        <div class="airdrop-task-list task3">
+                            <div class="friend-icon"></div>
+                            <p class="task-text" data-lang="home-invite">Invite a Friend</p>
+                            <div class="airdrop-list-status">
+                                <div class="airdrop-list-icon" id="check_friends_count_icon"></div>
+                                <div class="airdrop-list-circle" id="check_friends_count_circle"></div>
+                            </div>                         
+                        </div>
+
+                        <div class="airdrop-task-list task4">
+                            <div class="donut"></div>
+                            <p class="task-text" data-lang="earn-sponsored">Sponsored View</p>
+                            <p>x20</p>
+                            <div class="airdrop-list-status">
+                                <div class="airdrop-list-icon" id="check_sw_icon"></div>
+                                <div class="airdrop-list-circle" id="check_sw_circle"></div>
+                            </div>                         
+                        </div>
+
+                        <div class="airdrop-task-list task5">
+                            <div class="coin100"></div>
+                            <div class="task-text-buy">
+                                <p data-lang="buy">Buy</p>
+                                <p><span class="highlight2"> 100 </span> $NVRM</p>
+                            </div>
+                            <div class="airdrop-list-status">
+                                <div class="airdrop-list-icon" id="check_buy100_icon"></div>
+                                <div class="airdrop-list-circle" id="check_buy100_circle"></div>
+                            </div>                         
+                        </div>
+
+                        <div class="airdrop-task-list task6">
+                            <div class="miner-fire-icon"></div>
+                            <p class="task-text" data-lang="mining_1000_coins">Mine 1000 coins</p>
+                            <div class="airdrop-list-status">
+                                <div class="airdrop-list-icon" id="check_mine_coins_icon"></div>
+                                <div class="airdrop-list-circle" id="check_mine_coins_circle"></div>
+                            </div>                         
+                        </div>
+                    </div>
+
+                    <button class="button-airdrop-confirm disabled" id="buttonairdropconfirm" data-lang="claim"
+                        disabled>Claim</button>
+
+                    <h3 data-lang="warning_011_ton">Warning! You must have at least 0.11 TON to cover the transaction
+                        fee.</h3>
+                </div>
+
+                <div class="modal-message-processing-content" id="modal_processing_airdrop" style="display: none;">
+                    <svg class="machine machine-withdrawal" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                        viewBox="0 0 645 526">
+                        <defs />
+                        <g>
+                            <path x="-173,694" y="-173,694" class="large-shadow"
+                                d="M645 194v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L602 68l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L482 10h-21l-4 29c-10 1-19 3-28 6l-14-25 -19 8 7 28c-8 5-16 10-24 16l-23-17L341 68l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L645 194zM471 294c-61 0-110-49-110-110S411 74 471 74s110 49 110 110S532 294 471 294z" />
+                        </g>
+                        <g>
+                            <path x="-136,996" y="-136,996" class="medium-shadow"
+                                d="M402 400v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L352 323c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L402 400zM265 463c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C338 430 305 463 265 463z" />
+                        </g>
+                        <g>
+                            <path x="-173,694" y="-173,694" class="large"
+                                d="M635 184v-21l-29-4c-1-10-3-19-6-28l25-14 -8-19 -28 7c-5-8-10-16-16-24L592 58l-15-15 -23 17c-7-6-15-11-24-16l7-28 -19-8 -14 25c-9-3-18-5-28-6L472 0h-21l-4 29c-10 1-19 3-28 6L405 9l-19 8 7 28c-8 5-16 10-24 16l-23-17L331 58l17 23c-6 7-11 15-16 24l-28-7 -8 19 25 14c-3 9-5 18-6 28l-29 4v21l29 4c1 10 3 19 6 28l-25 14 8 19 28-7c5 8 10 16 16 24l-17 23 15 15 23-17c7 6 15 11 24 16l-7 28 19 8 14-25c9 3 18 5 28 6l4 29h21l4-29c10-1 19-3 28-6l14 25 19-8 -7-28c8-5 16-10 24-16l23 17 15-15 -17-23c6-7 11-15 16-24l28 7 8-19 -25-14c3-9 5-18 6-28L635 184zM461 284c-61 0-110-49-110-110S401 64 461 64s110 49 110 110S522 284 461 284z" />
+                        </g>
+                        <g>
+                            <path x="-136,996" y="-136,996" class="medium"
+                                d="M392 390v-21l-28-4c-1-10-4-19-7-28l23-17 -11-18L342 313c-6-8-13-14-20-20l11-26 -18-11 -17 23c-9-4-18-6-28-7l-4-28h-21l-4 28c-10 1-19 4-28 7l-17-23 -18 11 11 26c-8 6-14 13-20 20l-26-11 -11 18 23 17c-4 9-6 18-7 28l-28 4v21l28 4c1 10 4 19 7 28l-23 17 11 18 26-11c6 8 13 14 20 20l-11 26 18 11 17-23c9 4 18 6 28 7l4 28h21l4-28c10-1 19-4 28-7l17 23 18-11 -11-26c8-6 14-13 20-20l26 11 11-18 -23-17c4-9 6-18 7-28L392 390zM255 453c-41 0-74-33-74-74 0-41 33-74 74-74 41 0 74 33 74 74C328 420 295 453 255 453z" />
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="modal-message-end-content" id="successMessageVisibleAirdrop" style="display: none;">
+                    <h2 data-lang="miner-success">Success</h2>
+                    <div class="big-check"></div>
+                    <div class="amount-received-text" id="amount-received-text"></div>
+                    <button class="button-main" id="buttonOKAirdrop" data-lang="OK">OK</button>
+                </div>
+
+                <div class="modal-message-error-content" id="modal_error_content_wallet_airdrop" style="display: none;">
+                    <div class="big-error-check"></div>
+                    <button class="button-withdrawal" id="button_error_wallet_airdrop" data-lang="OK">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Setting -->
+    <div id="setting" class="content">
+        <!-- Title -->
+        <div class="title-frame">
+            <div class="title" data-lang="nav-setting">Setting</div>
+            <span class="title-line"></span>
+        </div>
+
+        <!-- Divider Text -->
+        <div class="divider-text-frame">
+            <span class="divider-text" data-lang="div-text-setting">Main options</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- Setting Tasks -->
+        <div class="task-frame">
+            <!-- Language -->
+            <button class="task" id="langButton">
+                <div class="earth-icon"></div>
+                <p class="task-text" data-lang="task-text-setting-lang">Select Language</p>
+                <div class="task-status-setting">
+                    <span class="langmenu-setting" id="langmenuText">EN</span>
+                    <div class="arrow-setting" id="status-icon-lang"></div>
+                </div>
+            </button>
+
+            <!-- Dropdown Language -->
+            <div class="dropdown-menu-lang-setting" id="dropdownMenu-lang" style="display: none;">
+                <button class="dropdown-item-lang-setting" id="en">
+                    <img src="/static/images/setting/eng.svg" id="enicon" alt="EN" class="dropdown-icon-setting">
+                    EN</button>
+                <button class="dropdown-item-lang-setting" id="de">
+                    <img src="/static/images/setting/de.svg" id="deicon" alt="DE" class="dropdown-icon-setting">
+                    DE</button>
+                <button class="dropdown-item-lang-setting" id="fr">
+                    <img src="/static/images/setting/fr.svg" id="fricon" alt="FR" class="dropdown-icon-setting">
+                    FR</button>
+                <button class="dropdown-item-lang-setting" id="it">
+                    <img src="/static/images/setting/it.svg" id="iticon" alt="IT" class="dropdown-icon-setting">
+                    IT</button>
+                <button class="dropdown-item-lang-setting" id="es">
+                    <img src="/static/images/setting/es.svg" id="esicon" alt="ES" class="dropdown-icon-setting">
+                    ES</button>
+                <button class="dropdown-item-lang-setting" id="pt">
+                    <img src="/static/images/setting/pt.svg" id="pticon" alt="PT" class="dropdown-icon-setting">
+                    PT</button>
+                <button class="dropdown-item-lang-setting" id="ru">
+                    <img src="/static/images/setting/ru.svg" id="ruicon" alt="RU" class="dropdown-icon-setting">
+                    RU</button>
+                <button class="dropdown-item-lang-setting" id="hi">
+                    <img src="/static/images/setting/hi.svg" id="hiicon" alt="HI" class="dropdown-icon-setting">
+                    HI</button>
+                <button class="dropdown-item-lang-setting" id="id">
+                    <img src="/static/images/setting/id.svg" id="idicon" alt="ID" class="dropdown-icon-setting">
+                    ID</button>
+                <button class="dropdown-item-lang-setting" id="tr">
+                    <img src="/static/images/setting/tr.svg" id="tricon" alt="TR" class="dropdown-icon-setting">
+                    TR</button>
+                <button class="dropdown-item-lang-setting" id="vi">
+                    <img src="/static/images/setting/vi.svg" id="viicon" alt="VI" class="dropdown-icon-setting">
+                    VI</button>
+            </div>
+
+            <!-- Color Scheme -->
+            <button class="task" id="colorThemeButton">
+                <div class="color-icon"></div>
+                <p class="task-text" data-lang="task-text-setting-color">Color Theme</p>
+                <div class="task-status-setting">
+                    <span class="colorthememenu-setting" id="colorThemeText"
+                        data-lang="colorthememenu-setting-lang">Dark</span>
+                    <div class="arrow-setting" id="status-icon-color"></div>
+                </div>
+            </button>
+
+            <!-- Dropdown Color -->
+            <div class="dropdown-menu-color-setting" id="dropdownMenu" style="display: none;">
+                <button class="dropdown-item-color-setting" id="darkTheme" data-lang="dropdown-item-setting-lang-dark">
+                    <div class="dark-icon-setting"></div>Dark
+                </button>
+                <button class="dropdown-item-color-setting" id="lightTheme"
+                    data-lang="dropdown-item-setting-lang-light">
+                    <div class="light-icon-setting"></div>Light
+                </button>
+            </div>
+
+            <!-- Delete Account -->
+            <button class="task" id="deletebutton">
+                <div class="delete-icon"></div>
+                <p class="task-text" data-lang="task-text-setting-delete">Delete Account</p>
+            </button>
+        </div>
+
+        <!-- Links Frame -->
+        <div class="links-frame-setting">
+            <div class="block-site-setting">
+                <a href="https://nivarium.online" target="_blank" rel="noopener noreferrer"
+                    class="nivarium-site-setting">Nivarium</a>
+                <div class="link-icon-setting"></div>
+            </div>
+
+            <a href="#" class="terms-setting" data-lang="task-text-setting-terms">Terms of Use</a>
+            <a href="#" class="policy-setting" data-lang="task-text-setting-policy">Privacy Policy</a>
+        </div>
+
+        <!-- Social Icon -->
+        <div class="socail-icon-frame">
+            <button class="social-button-telegram" id="buttontelegram"></button>
+            <button class="social-button-x" id="buttonx"></button>
+            <button class="social-button-tiktok" id="buttontiktok"></button>
+        </div>
+
+        <!-- Image Frame -->
+        <div class="image-setting"></div>
+
+        <!-- Modal Window Setting -->
+        <!-- Delete Account -->
+        <div class="modal" id="modal-delete">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <button id="close-modal-delete" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <h2 class="delete-text" data-lang="task-text-setting-sure">Are you sure you want to delete
+                        your account?</h2>
+                    </h2>
+                    <div class="button-frame-modal">
+                        <button class="button-main" id="deleteAccountButton" data-lang="task-text-setting-delete">Delete
+                            Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terms of Use -->
+        <div class="modal" id="modal-terms">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <h2 data-lang="task-text-setting-terms">Terms Of Use</h2>
+                    <button id="close-modal-terms" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <p data-lang="t1">By using the Nivarium app, you agree to the following terms:</p>
+                    <h2 data-lang="t2">1. User Responsibilities</h2>
+                    <p data-lang="t3">As a user, you are responsible for maintaining the security of your account and
+                        ensuring that
+                        your usage of the app complies with all applicable laws.</p>
+                    <h2 data-lang="t4">2. Use of Services</h2>
+                    <p data-lang="t5">The Nivarium app allows you to store, transfer, and mine cryptocurrency tokens.
+                        You agree to use
+                        these services at your own risk and acknowledge the volatile nature of cryptocurrency markets.
+                    </p>
+                    <h2 data-lang="t6">3. Limitation of Liability</h2>
+                    <p data-lang="t7">Nivarium is not responsible for any losses, damages, or financial consequences
+                        arising from the
+                        use of the app, including but not limited to the value of cryptocurrency tokens.</p>
+                    <h2 data-lang="t8">4. Account Termination</h2>
+                    <p data-lang="t9">We reserve the right to suspend or terminate your account if we believe you have
+                        violated these
+                        terms or engaged in fraudulent or illegal activities.</p>
+                    <h2 data-lang="t10">5. Amendments</h2>
+                    <p data-lang="t11">We reserve the right to modify these terms at any time. By continuing to use the
+                        app, you agree
+                        to be bound by any updated terms.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Privacy Policy -->
+        <div class="modal" id="modal-policy">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <h2 data-lang="task-text-setting-policy">Privacy Policy</h2>
+                    <button id="close-modal-policy" class="close-modal">&times;</button>
+                </div>
+                <div class="modal-message">
+                    <p data-lang="pp1">This Privacy Policy explains how Nivarium (we, us, or our) collects, uses, and
+                        protects
+                        your personal data when you use the Nivarium app.</p>
+                    <h2 data-lang="pp2">1. Data Collection</h2>
+                    <p data-lang="pp3">We collect personal information such as your name, email address, wallet details,
+                        and usage data
+                        when you create an account or use our services.</p>
+                    <h2 data-lang="pp4">2. Use of Data</h2>
+                    <p data-lang="pp5">Your data is used to provide and improve the app's services, facilitate
+                        transactions, and
+                        communicate with you. We may also use aggregated data for analysis purposes. </p>
+                    <h2 data-lang="pp6">3. Data Protection</h2>
+                    <p data-lang="pp7">We take appropriate security measures to protect your personal data from
+                        unauthorized access,
+                        disclosure, or alteration.</p>
+                    <h2 data-lang="pp8">4. Third-Party Sharing</h2>
+                    <p data-lang="pp9">We do not share your personal data with third parties unless required by law or
+                        necessary for the
+                        operation of our services.</p>
+                    <h2 data-lang="pp10">5. User Rights</h2>
+                    <p data-lang="pp11">You have the right to access, update, or delete your data at any time. If you
+                        wish to exercise
+                        these rights, please contact us.</p>
+                    <h2 data-lang="pp12">6. Changes to Privacy Policy</h2>
+                    <p data-lang="pp13">We may update this policy from time to time. You will be notified of any
+                        significant changes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Window -->
+    <div class="alert_window" id="alert-window-link-copied" style="display: none;">
+        <p data-lang="alert_window_link_copied">Link copied</p>
+    </div>
+
+    <!-- Alert Window Modal -->
+    <div class="alert_window-warning" id="alert-window-modal" style="display: none;">
+        <p data-lang="alert_window_modal">Stop the miner!</p>
+    </div>
+
+    <!-- Alert Window Modal TON price-->
+    <div class="alert_window-warning" id="alert-window-modal-ton-price" style="display: none;">
+        <p data-lang="error_ton_price">TON price could not be fetched. Please try again later.</p>
+    </div>
+
+    <!-- Alert Window Modal -->
+    <div class="alert_window-warning" id="notification" style="display: none;">
+        <p data-lang="alert_window_modal">Error!</p>
+    </div>
+
+    <!-- Everyday Bonus -->
+    <div class="modal-bonus" id="modal_bonus">
+        <p><span class="highlight1" data-lang="everydaybonus">Your daily bonus!</span></p>
+        <div class="bonus">
+            <div class="bonus-coin" id="bonus_coin">
+                <span class="bonus-prcnt"><span class="highlight3" id="coin_prise"></span></span>
+                <span>$NRVM</span>
+            </div>
+            <button class="button-main-bonus" id="button_bonus_ok" data-lang="OK">OK</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <ul>
+            <li class="list">
+                <a href="#" class="menu-item" data-target="home">
+                    <span class="icon">
+                        <div class="icon-img-home"></div>
+                    </span>
+                    <span class="text" data-lang="nav-home">Home</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#" class="menu-item" data-target="earn">
+                    <span class="icon">
+                        <div class="icon-img-earn"></div>
+                    </span>
+                    <span class="text" data-lang="nav-earn">Earn</span>
+                </a>
+            </li>
+            <li class="list active">
+                <a href="#" class="menu-item" data-target="miner">
+                    <span class="icon">
+                        <div class="icon-img-miner-active"></div>
+                    </span>
+                    <span class="text" data-lang="nav-miner">Miner</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#" class="menu-item" data-target="wallet">
+                    <span class="icon">
+                        <div class="icon-img-wallet"></div>
+                    </span>
+                    <span class="text" data-lang="nav-wallet">Wallet</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#" class="menu-item" data-target="setting">
+                    <span class="icon">
+                        <div class="icon-img-setting"></div>
+                    </span>
+                    <span class="text" data-lang="nav-setting">Setting</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <script src="static/script/navigation.js"></script>
+    <script src="static/script/page.js"></script>
+    <script src="static/script/minerstart.js"></script>
+    <script src="static/script/modalwindow.js"></script>
+    <script src="static/script/dropdown.js"></script>
+    <script src="static/script/interactive.js"></script>
+    <script src="static/script/updatedatadb.js"></script>
+    <script src="static/script/friends.js"></script>
+    <script src="static/script/payments.js"></script>
+    <script src="static/script/descopyer.js"></script>
+    <!--<script src="static/script/snowflake.js"></script>-->
+
+    <!-- Delete Account -->
+    <script>
+        document.getElementById('deleteAccountButton').addEventListener('click', async () => {
+            const userDataFromServer = JSON.parse('{{ user_data|tojson | safe }}');
+
+            try {
+                const response = await fetch('/delete_user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ _id: userDataFromServer._id })
+                });
+
+                const result = await response.json();
+                if (result.status === 'success') {
+                    localStorage.clear();
+                    window.location.href = '/success_page';
+                } else {
+                    console.error('Error deleting user:', result.message);
+                }
+            } catch (error) {
+                console.error('Error sending delete request:', error);
+            }
+        });
+    </script>
+
+    <!-- Get User Name & Id -->
+    <script>
+        const userDataFromServer = JSON.parse('{{ user_data|tojson | safe }}');
+        localStorage.setItem('telegram_id', userDataFromServer.telegram_id);
+        localStorage.setItem('telegram_name', userDataFromServer.telegram_name);
+    </script>
+
+    <!-- Social Button Click -->
+    <script>
+        const joinButtonTG = document.getElementById('buttontelegram');
+        const followButtonX = document.getElementById('buttonx');
+        const followButtonF = document.getElementById('buttontiktok');
+
+        joinButtonTG.addEventListener('click', function () {
+            window.open('https://t.me/nivarium_official', '_blank');
+        });
+
+        followButtonX.addEventListener('click', function () {
+            window.open('https://x.com/nivarium', '_blank');
+        });
+
+        followButtonF.addEventListener('click', function () {
+            window.open('https://www.tiktok.com/@nivarium', '_blank');
+        });
+    </script>
+
+    <!-- Wallet Connect & Payments-->
+    <script src="https://cdn.jsdelivr.net/npm/tonweb@0.0.52/dist/tonweb.min.js"></script>
+    <script src="../static/script/tonconnect-sdk.min.js"></script>
+    <script src="../static/script/tonweb/dist/tonweb.js"></script>
+    <script src="../static/script/tonweb-mnemonic/dist/web/index.js"></script>
+
+    <script type="module">
+        const { toUserFriendlyAddress } = TonConnectSDK;
+        const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+            manifestUrl: 'https://web.com/static/manifest.json',
+            buttonRootId: 'tonconnect-connect-button'
+        });
+
+        let isReloaded = false;
+        window.tonConnectUI = tonConnectUI;
+
+        function updateStateAndButtons(statusWalletConnect) {
+            const buttonStatuses = {
+                connected: true,
+                disconnected: false
+            };
+
+            const status = buttonStatuses[statusWalletConnect] ?? false;
+
+            localStorage.setItem('wallet_status', statusWalletConnect);
+            localStorage.setItem('button_status', status);
+
+            const buttons = [
+                ...document.querySelectorAll('.button-vaucher'),
+                document.querySelector('.button-buy-wallet'),
+                document.querySelector('.button-withdrawal-wallet'),
+                document.querySelector('.button-airdrop-wallet'),
+                document.querySelector('.button-confirm-buy')
+            ];
+
+            buttons.forEach((btn) => {
+                if (btn) {
+                    if (status) {
+                        btn.classList.remove('disabled');
+                        btn.disabled = false;
+                    } else {
+                        btn.classList.add('disabled');
+                        btn.disabled = true;
+                    }
+                }
+            });
+        }
+
+        async function handleWalletConnection(wallet) {
+            try {
+                if (wallet && wallet.account && wallet.account.address) {
+                    const currentAddress = wallet.account.address;
+                    const userFriendlyAddress = toUserFriendlyAddress(currentAddress);
+
+                    localStorage.setItem('userTONAddress', currentAddress);
+                    updateStateAndButtons('connected');
+                } else {
+                    updateStateAndButtons('disconnected');
+                }
+            } catch (error) {
+                console.error("Error connected wallet:", error);
+            }
+        }
+
+        function handleWalletDisconnect() {
+            updateStateAndButtons('disconnected');
+            if (!isReloaded) {
+                isReloaded = true;
+                location.reload();
+            }
+        }
+
+        tonConnectUI.onStatusChange((status) => {
+            if (status && status.account && status.account.address) {
+                localStorage.setItem('wallet_status', 'connected');
+                localStorage.setItem('button_status', true);
+                handleWalletConnection(status);
+            } else {
+                localStorage.setItem('wallet_status', 'disconnected');
+                localStorage.setItem('button_status', false);
+                handleWalletDisconnect();
+            }
+        });
+
+        updateStateAndButtons(localStorage.getItem('wallet_status') || 'disconnected');
+    </script>
+
+    <script type="module">
+        let SELLER_WALLET_ADDRESS = '';
+        let JETTON_MINTER_ADDRESS = '';
+        let SEED_PHRASE = [];
+
+        const confirmButtonBuy = document.getElementById('buttonwalletbuy');
+        const modalbuynivariumWindow = document.getElementById("modal-buynivarium");
+        const amountPayInput = document.getElementById('amount-pay');
+        const amountReceiveInput = document.getElementById('amount-receive');
+        const inputPayText = document.querySelector('.input-pay p');
+        const amountWithdrawalInput = document.getElementById('amount-withdrawal');
+
+        const confirmButtonWithdrawal = document.getElementById('buttonwithdrawalconfirm');
+        const confirmButtonAirdrop = document.getElementById('buttonairdropconfirm');
+
+        const mainContentBuy = document.getElementById('modal-message-main-content-buy-nivarium');
+        const processingBuy = document.getElementById('modal_processing_buy_wallet');
+        const errorDivBuy = document.getElementById('modal_error_content_buy_wallet');
+        const successDivBuy = document.getElementById('successMessageVisiblebuy');
+        const hederBuy = document.getElementById('modal-header-buy-nivarium');
+
+        const mainContentWithdrawal = document.getElementById('modal-message-main-content-withdrawal-nivarium');
+        const processingDivWithdrawal = document.getElementById('modal_processing_withdrawal');
+        const errorDivWithdrawal = document.getElementById('modal_error_content_wallet_withdrawal');
+        const successDivWithdrawal = document.getElementById('successMessageVisibleWithdrawal');
+        const hederWithdrawal = document.getElementById('modal-header-withdrawal-nivarium');
+
+        const mainContentAirdrop = document.getElementById('modal-message-main-content-airdrop-nivarium');
+        const hederAirdrop = document.getElementById('modal-header-airdrop-nivarium');
+        const processingDivAirdrop = document.getElementById('modal_processing_airdrop');
+        const successDivAirdrop = document.getElementById('successMessageVisibleAirdrop');
+        const errorDivAirdrop = document.getElementById('modal_error_content_wallet_airdrop');
+
+        const button_voucher_buy100 = document.getElementById('button_voucher_buy100');
+        const button_voucher_buy100_boost = document.getElementById('button_voucher_buy100_boost');
+        const button_voucher_buy1000 = document.getElementById('button_voucher_buy1000');
+        const button_voucher_buy1000_boost = document.getElementById('button_voucher_buy1000_boost');
+
+        const modal_main_content_buy100 = document.getElementById('modal_main_content_buy100');
+        const modal_header_buy100 = document.getElementById('modal_header_buy100');
+        const modal_header_p_buy100 = document.getElementById('modal_header_p_buy100');
+        const modal_header_p2_buy100 = document.getElementById('modal_header_p2_buy100');
+        const modal_header_processing_buy100 = document.getElementById('modal_header_processing_buy100');
+        const modal_processing_content_buy100 = document.getElementById('modal_processing_content_buy100');
+        const modal_succes_content_buy100 = document.getElementById('modal_succes_content_buy100');
+        const modal_error_content_buy100 = document.getElementById('modal_error_content_buy100');
+
+        const modal_main_content_buy100_boost = document.getElementById('modal_main_content_buy100_boost');
+        const modal_header_buy100_boost = document.getElementById('modal_header_buy100_boost');
+        const modal_header_p_buy100_boost = document.getElementById('modal_header_p_buy100_boost');
+        const modal_header_p2_buy100_boost = document.getElementById('modal_header_p2_buy100_boost');
+        const modal_header_processing_buy100_boost = document.getElementById('modal_header_processing_buy100_boost');
+        const modal_processing_content_buy100_boost = document.getElementById('modal_processing_content_buy100_boost');
+        const modal_succes_content_buy100_boost = document.getElementById('modal_succes_content_buy100_boost');
+        const modal_error_content_buy100_boost = document.getElementById('modal_error_content_buy100_boost');
+
+        const modal_main_content_buy1000 = document.getElementById('modal_main_content_buy1000');
+        const modal_header_buy1000 = document.getElementById('modal_header_buy1000');
+        const modal_header_p_buy1000 = document.getElementById('modal_header_p_buy1000');
+        const modal_header_p2_buy1000 = document.getElementById('modal_header_p2_buy1000');
+        const modal_header_processing_buy1000 = document.getElementById('modal_header_processing_buy1000');
+        const modal_processing_content_buy1000 = document.getElementById('modal_processing_content_buy1000');
+        const modal_succes_content_buy1000 = document.getElementById('modal_succes_content_buy1000');
+        const modal_error_content_buy1000 = document.getElementById('modal_error_content_buy1000');
+
+        const modal_main_content_buy1000_boost = document.getElementById('modal_main_content_buy1000_boost');
+        const modal_header_buy1000_boost = document.getElementById('modal_header_buy1000_boost');
+        const modal_header_p_buy1000_boost = document.getElementById('modal_header_p_buy1000_boost');
+        const modal_header_p2_buy1000_boost = document.getElementById('modal_header_p2_buy1000_boost');
+        const modal_header_processing_buy1000_boost = document.getElementById('modal_header_processing_buy1000_boost');
+        const modal_processing_content_buy1000_boost = document.getElementById('modal_processing_content_buy1000_boost');
+        const modal_succes_content_buy1000_boost = document.getElementById('modal_succes_content_buy1000_boost');
+        const modal_error_content_buy1000_boost = document.getElementById('modal_error_content_buy1000_boost');
+
+        function toggleButtons(state) {
+            const buttons = [
+                ...document.querySelectorAll('.button-vaucher'),
+                document.querySelector('.button-buy-wallet'),
+                document.querySelector('.button-withdrawal-wallet'),
+                document.querySelector('.button-airdrop-wallet'),
+                document.querySelector('.button-confirm-buy'),
+            ];
+
+            buttons.forEach((btn) => {
+                if (btn) {
+                    if (state === 'enable') {
+                        btn.classList.remove('disabled');
+                        btn.disabled = false;
+                    } else {
+                        btn.classList.add('disabled');
+                        btn.disabled = true;
+                    }
+                }
+            });
+        }
+
+        function showAlert(message, duration = 3000) {
+            const notification = document.getElementById('notification');
+            if (notification) {
+                notification.querySelector('p').textContent = message;
+                notification.style.display = 'flex';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, duration);
+            }
+        }
+
+        async function getConfig() {
+            try {
+                const response = await fetch('/config', { method: 'GET' });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (!data.SEED_PHRASE || !Array.isArray(data.SEED_PHRASE) || !data.JETTON_MINTER_ADDRESS) {
+                    throw new Error('Invalid SEED_PHRASE format received from server');
+                }
+
+                SELLER_WALLET_ADDRESS = data.SELLER_WALLET_ADDRESS;
+                SEED_PHRASE = data.SEED_PHRASE;
+                JETTON_MINTER_ADDRESS = data.JETTON_MINTER_ADDRESS;
+
+                if (!SELLER_WALLET_ADDRESS || !JETTON_MINTER_ADDRESS) {
+                    throw new Error('Missing required configuration values');
+                }
+
+                return data;
+            } catch (error) {
+                console.error('Error fetching configuration:', error);
+                return null;
+            }
+        }
+
+        async function initializeTonWeb() {
+            try {
+                const tonMnemonic = window.TonWeb.mnemonic;
+                const seed = await tonMnemonic.mnemonicToSeed(SEED_PHRASE);
+                const jettonMinterAddress = JETTON_MINTER_ADDRESS;
+
+                const keyPair = await tonMnemonic.mnemonicToKeyPair(SEED_PHRASE);
+                const tonweb = new TonWeb(new TonWeb.HttpProvider('https://toncenter.com/api/v2/jsonRPC', {
+                    apiKey: '........',
+                    timeout: 15000,
+                }));
+
+                return { tonweb, keyPair };
+            } catch (error) {
+                console.error('Error initializing TonWeb:', error);
+                return null;
+            }
+        }
+
+        async function initializeApp() {
+            try {
+                const config = await getConfig();
+                if (!config) {
+                    throw new Error('Configuration failed to load. Application cannot proceed.');
+                }
+
+                const tonData = await initializeTonWeb();
+                if (!tonData) {
+                    throw new Error('TonWeb initialization failed. Application cannot proceed.');
+                }
+
+                const walletStatus = localStorage.getItem('wallet_status');
+                if (walletStatus === 'connected') {
+                    toggleButtons('enable');
+                } else {
+                    toggleButtons('disable');
+                }
+
+                return tonData;
+            } catch (error) {
+                console.error('Error during application initialization:', error);
+                showAlert('Application failed to initialize. Please try again later.', 5000);
+                return null;
+            }
+        }
+
+        const tonData = await initializeApp();
+
+        if (tonData) {
+            const { tonweb, keyPair } = tonData;
+            const seedPhrase = SEED_PHRASE;
+            const sellerWalletAddress = SELLER_WALLET_ADDRESS;
+            const jettonMinterAddress = JETTON_MINTER_ADDRESS;
+
+            button_voucher_buy100.addEventListener('click', async function () {
+                const statusKey = 'statusBuy100Voucher';
+                const discount100 = 1;
+                const amountReceive = 100;
+                const amountFee = 0.11;
+
+                try {
+                    const NVRM_PRICE = await fetchPrice();
+                    const TON_PRICE = await getTonPrice();
+                    const nvrmTotal = (NVRM_PRICE * amountReceive) * discount100;
+                    const tonTotal = nvrmTotal / TON_PRICE;
+                    const totalAmount = parseFloat((amountFee + tonTotal).toFixed(3));
+
+                    localStorage.setItem(statusKey, 'processing');
+                    setStatusWithTimestamp(`${statusKey}_time_stamp`);
+                    updateUIbuy100("processing");
+
+                    await sendTONToSeller(totalAmount);
+
+                    await SendTokens(amountReceive.toString());
+
+                    localStorage.setItem(statusKey, 'finished');
+                    updateUIbuy100("finished");
+                } catch (error) {
+                    console.error('Error:', error);
+                    localStorage.setItem(statusKey, 'error');
+                    updateUIbuy100("error");
+                }
+            });
+
+            button_voucher_buy100_boost.addEventListener('click', async function () {
+                const statusKey = 'statusBuy100Voucher';
+                const discount100 = 1;
+                const amountReceive = 100;
+                const amountFee = 0.11;
+
+                try {
+                    const NVRM_PRICE = await fetchPrice();
+                    const TON_PRICE = await getTonPrice();
+                    const nvrmTotal = (NVRM_PRICE * amountReceive) * discount100;
+                    const tonTotal = nvrmTotal / TON_PRICE;
+                    const totalAmount = parseFloat((amountFee + tonTotal).toFixed(3));
+
+                    localStorage.setItem(statusKey, 'processing');
+                    setStatusWithTimestamp(`${statusKey}_time_stamp`);
+                    updateUIbuy100("processing");
+
+                    await sendTONToSeller(totalAmount);
+
+                    await SendTokens(amountReceive.toString());
+
+                    localStorage.setItem(statusKey, 'finished');
+                    updateUIbuy100("finished");
+                } catch (error) {
+                    console.error('Error:', error);
+                    localStorage.setItem(statusKey, 'error');
+                    updateUIbuy100("error");
+                }
+            });
+
+            button_voucher_buy1000.addEventListener('click', async function () {
+                const statusKey = 'statusBuy1000Voucher';
+                const discount100 = 0.5;
+                const amountReceive = 1000;
+                const amountFee = 0.11;
+
+                try {
+                    const NVRM_PRICE = await fetchPrice();
+                    const TON_PRICE = await getTonPrice();
+                    const nvrmTotal = (NVRM_PRICE * amountReceive) * discount100;
+                    const tonTotal = nvrmTotal / TON_PRICE;
+                    const totalAmount = parseFloat((amountFee + tonTotal).toFixed(3));
+
+                    localStorage.setItem(statusKey, 'processing');
+                    setStatusWithTimestamp(`${statusKey}_time_stamp`);
+                    updateUIbuy1000("processing");
+
+                    await sendTONToSeller(totalAmount);
+
+                    await SendTokens(amountReceive.toString());
+
+                    localStorage.setItem(statusKey, 'finished');
+                    updateUIbuy1000("finished");
+                } catch (error) {
+                    console.error('Error:', error);
+                    localStorage.setItem(statusKey, 'error');
+                    updateUIbuy1000("error");
+                }
+            });
+
+            button_voucher_buy1000_boost.addEventListener('click', async function () {
+                const statusKey = 'statusBuy1000Voucher';
+                const discount100 = 0.5;
+                const amountReceive = 1000;
+                const amountFee = 0.11;
+
+                try {
+                    const NVRM_PRICE = await fetchPrice();
+                    const TON_PRICE = await getTonPrice();
+                    const nvrmTotal = (NVRM_PRICE * amountReceive) * discount100;
+                    const tonTotal = nvrmTotal / TON_PRICE;
+                    const totalAmount = parseFloat((amountFee + tonTotal).toFixed(3));
+
+                    localStorage.setItem(statusKey, 'processing');
+                    setStatusWithTimestamp(`${statusKey}_time_stamp`);
+                    updateUIbuy1000("processing");
+
+                    await sendTONToSeller(totalAmount);
+
+                    await SendTokens(amountReceive.toString());
+
+                    localStorage.setItem(statusKey, 'finished');
+                    updateUIbuy1000("finished");
+                } catch (error) {
+                    console.error('Error:', error);
+                    localStorage.setItem(statusKey, 'error');
+                    updateUIbuy1000("error");
+                }
+            });
+
+            confirmButtonBuy.addEventListener('click', async function () {
+                const statusKey = 'statusBuyNivarium';
+                const amountPay = amountPayInput.value.trim();
+                const amountReceive = amountReceiveInput.value.trim();
+                const finalAmountPay = (parseFloat(amountPay) + 0.11).toFixed(3);
+                console.log('Final Amount Pay:', finalAmountPay);
+                console.log('Amount Receive:', amountReceive);
+
+                try {
+                    localStorage.setItem(statusKey, 'processing');
+                    setStatusWithTimestamp(`${statusKey}_time_stamp`);
+                    updateUIBuyNivarium('processing');
+
+                    await sendTONToSeller(finalAmountPay.toString());
+
+                    await SendTokens(amountReceive);
+
+                    localStorage.setItem(statusKey, 'finished');
+                    updateUIBuyNivarium('finished');
+                } catch (error) {
+                    console.error('Error:', error);
+                    localStorage.setItem(statusKey, 'error');
+                    updateUIBuyNivarium('error');
+                }
+            });
+
+            confirmButtonWithdrawal.addEventListener('click', async function () {
+                const statusKey = 'statusWithdrawalNivarium';
+                const amountWithdrawal = amountWithdrawalInput.value.trim();
+                const amountFee = 0.11;
+                console.log('Withdrawal Amount:', amountWithdrawal);
+
+                try {
+                    localStorage.setItem(statusKey, 'processing');
+                    setStatusWithTimestamp(`${statusKey}_time_stamp`);
+                    updateUIWithdrawalNivarium('processing');
+
+                    await sendTONToSeller(amountFee);
+
+                    await SendTokens(amountWithdrawal);
+
+                    localStorage.setItem(statusKey, 'finished');
+                    updateUIWithdrawalNivarium('finished');
+                    localStorage.setItem('withdrawal_amount', amountWithdrawal);
+                } catch (error) {
+                    console.error('Error:', error);
+                    localStorage.setItem(statusKey, 'error');
+                    updateUIWithdrawalNivarium('error');
+                }
+            });
+
+            confirmButtonAirdrop.addEventListener('click', async function () {
+                const statusKey = 'statusAirdropNivarium';
+                const amountAirdrop = parseFloat(localStorage.getItem('airdrop_balance')) || 0;
+                const airdropPrcnt = parseFloat(localStorage.getItem('airdrop_user_prcnt')) || 0;
+                const multiplier = 1 + (airdropPrcnt / 100);
+                const fullyAmountAirdrop = parseFloat((amountAirdrop * multiplier).toFixed(9));
+                console.log(`Total Airdrop: ${fullyAmountAirdrop}`);
+                const amountFee = 0.11;
+                try {
+                    localStorage.setItem(statusKey, 'processing');
+                    setStatusWithTimestamp(`${statusKey}_time_stamp`);
+                    updateUIAirdrop('processing');
+
+                    await sendTONToSeller(amountFee);
+
+                    await SendTokens(fullyAmountAirdrop.toString());
+
+                    localStorage.setItem(statusKey, 'finished');
+                    updateUIAirdrop('finished');
+                } catch (error) {
+                    console.error('Error:', error);
+                    localStorage.setItem(statusKey, 'error');
+                    updateUIAirdrop('error');
+                }
+            });
+
+            async function sendTONToSeller(amountpay) {
+                if (!window.tonConnectUI) {
+                    throw new Error('tonConnectUI is not initialized.');
+                }
+
+                const nanoTON = (amountpay) => {
+                    if (isNaN(amountpay) || amountpay <= 0) {
+                        throw new Error('Invalid payment amount.');
+                    }
+                    return (parseFloat(amountpay) * 1e9).toFixed(0);
+                };
+
+                const amountInNanoTON = nanoTON(amountpay);
+                console.log('Amount in NanoTon:', amountInNanoTON);
+
+                const transaction = {
+                    validUntil: Math.floor(Date.now() / 1000) + 600,
+                    messages: [
+                        {
+                            address: sellerWalletAddress,
+                            amount: amountInNanoTON,
+                        },
+                    ],
+                };
+
+                try {
+                    const result = await window.tonConnectUI.connector.sendTransaction(transaction);
+                    if (!result || !result.boc) {
+                        throw new Error('Transaction failed.');
+                    }
+                } catch (error) {
+                    console.error("Error sending TON:", error);
+                    throw new Error('Failed to send TON to seller.');
+                }
+            }
+
+            const SendTokens = async (amountreceive) => {
+                const WalletClass = tonweb.wallet.all.v4R2;
+                const wallet = new WalletClass(tonweb.provider, {
+                    publicKey: keyPair.publicKey
+                });
+                const address = await wallet.getAddress();
+                const jettonMinter = new TonWeb.token.jetton.JettonMinter(tonweb.provider, { address: jettonMinterAddress });
+                const data = await jettonMinter.getJettonData();
+                const jettonWalletAddress = await jettonMinter.getJettonWalletAddress(address);
+                const jettonWallet = new TonWeb.token.jetton.JettonWallet(tonweb.provider, {
+                    address: jettonWalletAddress
+                });
+                const jettonData = await jettonWallet.getData();
+                const seqno = (await wallet.methods.seqno().call()) || 0;
+                const comment = new Uint8Array([... new Uint8Array(4), ... new TextEncoder().encode('Transfer $NVRM')]);
+                const walletAddressUser = localStorage.getItem('userTONAddress');
+
+                await wallet.methods.transfer({
+                    secretKey: keyPair.secretKey,
+                    toAddress: jettonWalletAddress, 
+                    amount: TonWeb.utils.toNano('0.05'), 
+                    seqno: seqno,
+                    payload: await jettonWallet.createTransferBody({
+                        queryId: seqno,
+                        jettonAmount: TonWeb.utils.toNano(amountreceive), 
+                        toAddress: new TonWeb.utils.Address(walletAddressUser), 
+                        forwardAmount: TonWeb.utils.toNano('0.01'), 
+                        forwardPayload: comment, 
+                        responseAddress: address 
+                    }),
+                    sendMode: 3,
+                }).send()
+            }
+        } else {
+            console.error('Application failed to initialize. Buttons will remain disabled.');
+        }
+
+        function updateUIBuyNivarium(status) {
+            if (status === "default") {
+                mainContentBuy.style.display = 'flex';
+                hederBuy.style.display = 'flex';
+                processingBuy.style.display = 'none';
+                errorDivBuy.style.display = 'none';
+                successDivBuy.style.display = 'none';
+            } else if (status === "processing") {
+                mainContentBuy.style.display = 'none';
+                hederBuy.style.display = 'none';
+                processingBuy.style.display = 'block';
+            } else if (status === "finished") {
+                processingBuy.style.display = 'none';
+                hederBuy.style.display = 'none';
+                successDivBuy.style.display = 'flex';
+            } else if (status === "error") {
+                processingBuy.style.display = 'none';
+                hederBuy.style.display = 'none';
+                errorDivBuy.style.display = 'flex';
+            }
+        }
+
+        function updateUIbuy100(status) {
+            if (status === "default") {
+                modal_main_content_buy100.style.display = 'flex';
+                modal_header_buy100.style.display = 'flex';
+                modal_error_content_buy100.style.display = 'none';
+                modal_processing_content_buy100.style.display = 'none';
+                modal_succes_content_buy100_boost.style.display = 'none';
+                //---
+                modal_main_content_buy100_boost.style.display = 'flex';
+                modal_header_buy100_boost.style.display = 'flex';
+                modal_error_content_buy100.style.display = 'none';
+                modal_processing_content_buy100_boost.style.display = 'none';
+                modal_succes_content_buy100_boost.style.display = 'none';
+            } else if (status === "processing") {
+                modal_processing_content_buy100.style.display = 'block';
+                modal_header_processing_buy100.style.display = 'block';
+                modal_main_content_buy100.style.display = 'none';
+                modal_header_p_buy100.style.display = 'none';
+                modal_header_p2_buy100.style.display = 'none';
+                //---
+                modal_processing_content_buy100_boost.style.display = 'block';
+                modal_header_processing_buy100_boost.style.display = 'block';
+                modal_main_content_buy100_boost.style.display = 'none';
+                modal_header_p_buy100_boost.style.display = 'none';
+                modal_header_p2_buy100_boost.style.display = 'none';
+            } else if (status === "finished") {
+                modal_succes_content_buy100.style.display = 'flex';
+                modal_main_content_buy100.style.display = 'none';
+                modal_processing_content_buy100.style.display = 'none';
+                modal_header_buy100.style.display = 'none';
+                //---
+                modal_succes_content_buy100_boost.style.display = 'flex';
+                modal_main_content_buy100_boost.style.display = 'none';
+                modal_processing_content_buy100_boost.style.display = 'none';
+                modal_header_buy100_boost.style.display = 'none';
+            } else if (status === "error") {
+                modal_error_content_buy100.style.display = 'flex';
+                modal_main_content_buy100.style.display = 'none';
+                modal_processing_content_buy100.style.display = 'none';
+                modal_succes_content_buy100.style.display = 'none';
+                modal_header_buy100.style.display = 'none';
+                //---
+                modal_error_content_buy100_boost.style.display = 'flex';
+                modal_main_content_buy100_boost.style.display = 'none';
+                modal_processing_content_buy100_boost.style.display = 'none';
+                modal_succes_content_buy100_boost.style.display = 'none';
+                modal_header_buy100_boost.style.display = 'none';
+            }
+        }
+
+        function updateUIbuy1000(status) {
+            if (status === "default") {
+                modal_main_content_buy1000.style.display = 'flex';
+                modal_header_buy1000.style.display = 'flex';
+                modal_error_content_buy1000.style.display = 'none';
+                modal_processing_content_buy1000.style.display = 'none';
+                modal_succes_content_buy1000_boost.style.display = 'none';
+                //---
+                modal_main_content_buy1000_boost.style.display = 'flex';
+                modal_header_buy1000_boost.style.display = 'flex';
+                modal_error_content_buy1000.style.display = 'none';
+                modal_processing_content_buy1000_boost.style.display = 'none';
+                modal_succes_content_buy1000_boost.style.display = 'none';
+            } else if (status === "processing") {
+                modal_processing_content_buy1000.style.display = 'block';
+                modal_header_processing_buy1000.style.display = 'block';
+                modal_main_content_buy1000.style.display = 'none';
+                modal_header_p_buy1000.style.display = 'none';
+                modal_header_p2_buy1000.style.display = 'none';
+                //---
+                modal_processing_content_buy1000_boost.style.display = 'block';
+                modal_header_processing_buy1000_boost.style.display = 'block';
+                modal_main_content_buy1000_boost.style.display = 'none';
+                modal_header_p_buy1000_boost.style.display = 'none';
+                modal_header_p2_buy1000_boost.style.display = 'none';
+            } else if (status === "finished") {
+                modal_succes_content_buy1000.style.display = 'flex';
+                modal_header_processing_buy1000.style.display = 'none';
+                modal_error_content_buy1000.style.display = 'none';
+                modal_main_content_buy1000.style.display = 'none';
+                modal_processing_content_buy1000.style.display = 'none';
+                modal_header_buy1000.style.display = 'none';
+                //---
+                modal_succes_content_buy1000_boost.style.display = 'flex';
+                modal_header_processing_buy1000_boost.style.display = 'none';
+                modal_error_content_buy1000_boost.style.display = 'none';
+                modal_main_content_buy1000_boost.style.display = 'none';
+                modal_processing_content_buy1000_boost.style.display = 'none';
+                modal_header_buy1000_boost.style.display = 'none';
+            } else if (status === "error") {
+                modal_error_content_buy1000.style.display = 'flex';
+                modal_main_content_buy1000.style.display = 'none';
+                modal_processing_content_buy1000.style.display = 'none';
+                modal_succes_content_buy1000.style.display = 'none';
+                modal_header_buy1000.style.display = 'none';
+                //---
+                modal_error_content_buy1000_boost.style.display = 'flex';
+                modal_main_content_buy1000_boost.style.display = 'none';
+                modal_processing_content_buy1000_boost.style.display = 'none';
+                modal_succes_content_buy1000_boost.style.display = 'none';
+                modal_header_buy1000_boost.style.display = 'none';
+            }
+        }
+
+        function updateUIWithdrawalNivarium(status) {
+            if (status === "default") {
+                mainContentWithdrawal.style.display = 'flex';
+                hederWithdrawal.style.display = 'flex';
+                processingDivWithdrawal.style.display = 'none';
+                successDivWithdrawal.style.display = 'none';
+                errorDivWithdrawal.style.display = 'none';
+            } else if (status === "processing") {
+                mainContentWithdrawal.style.display = 'none';
+                hederWithdrawal.style.display = 'none';
+                processingDivWithdrawal.style.display = 'block';
+            } else if (status === "finished") {
+                processingDivWithdrawal.style.display = 'none';
+                hederWithdrawal.style.display = 'none';
+                successDivWithdrawal.style.display = 'flex';
+            } else if (status === "error") {
+                processingDivWithdrawal.style.display = 'none';
+                hederWithdrawal.style.display = 'none';
+                errorDivWithdrawal.style.display = 'flex';
+            }
+        }
+
+        function updateUIAirdrop(status) {
+            if (status === "default") {
+                mainContentAirdrop.style.display = 'flex';
+                hederAirdrop.style.display = 'flex';
+                processingDivAirdrop.style.display = 'none';
+                successDivAirdrop.style.display = 'none';
+                errorDivAirdrop.style.display = 'none';
+            } else if (status === "processing") {
+                mainContentAirdrop.style.display = 'none';
+                hederAirdrop.style.display = 'none';
+                processingDivAirdrop.style.display = 'block';
+            } else if (status === "finished") {
+                processingDivAirdrop.style.display = 'none';
+                hederAirdrop.style.display = 'none';
+                successDivAirdrop.style.display = 'flex';
+            } else if (status === "error") {
+                processingDivAirdrop.style.display = 'none';
+                hederAirdrop.style.display = 'none';
+                errorDivAirdrop.style.display = 'flex';
+            }
+        }
+
+        function setStatusWithTimestamp(key) {
+            const timestamp = Date.now();
+            localStorage.setItem(key, timestamp);
+        }
+
+        async function fetchPrice() {
+            try {
+                const response = await fetch('/static/price.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                return parseFloat(data.nivarium_price);
+            } catch (error) {
+                console.error("Error loading price:", error);
+                return null;
+            }
+        }
+
+        async function getTonPrice() {
+            const apiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd';
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('Failed to fetch price');
+                const data = await response.json();
+                const tonPrice = data['the-open-network'].usd;
+                document.getElementById('tonprice').textContent = `1 TON ≈ $${tonPrice.toFixed(2)}`;
+                return data['the-open-network'].usd;
+            } catch (error) {
+                console.error('Error getting TON price:', error);
+                return null;
+            }
+        }
+    </script>
+</body>

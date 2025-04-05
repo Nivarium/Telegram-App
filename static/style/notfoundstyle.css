@@ -1,0 +1,80 @@
+:root {
+    --color-accent1: #583DCC;
+    --color-acc-shadow: #705ACB;
+    --color-accent2: #E8524F;
+    --color-acc2-shadow: #E77A78;
+    --color-accent3: #51E84F;
+    --color-acc3-shadow: #89ED87;
+    --color-stroke: #1E2831;
+    --color-white: #BCBCBC;
+    --color-text: #45545F;
+    --button-white: #D9D9D9;
+    --color-main-BG: linear-gradient(90deg, #0D1720, #0B1218);
+    --color-background: linear-gradient(90deg, #0B1218, #141D24);
+    /*custom*/
+    --background-dark: url("/static/images/blind-loading.svg");
+}
+
+.light-theme {
+    --color-accent1: #0047FF;
+    --color-acc-shadow: #1F5DFE;
+    --color-accent2: #850E0C;
+    --color-acc2-shadow: #E86E6C;
+    --color-accent3: #007327;
+    --color-acc3-shadow: #2A6D29;
+    --color-stroke: #1E2831;
+    --color-white: #131313;
+    --color-text: #111B22;
+    --button-white: #D9D9D9;
+    --color-main-BG: linear-gradient(90deg, #E1E1E1, #C9C9C9);
+    --color-background: linear-gradient(90deg, #c7c7c7, #CFCFCF);
+    /*custom*/
+    --background-dark: url("/static/images/blind-loading.svg");
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/static/Nunito-Regular.ttf') format('truetype');
+}
+
+/*------------------------------------------------------------------*/
+/*  Body & Main Content                                             */
+/*------------------------------------------------------------------*/
+body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--background-dark), var(--color-main-BG);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 90%;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    overflow-x: hidden;
+}
+.notfound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 98%;
+    height: calc(100% - 90px);
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    overflow-x: hidden;
+}
+
+.notfound h2 {
+    color: var(--color-accent1);
+    font-weight: 600;
+}

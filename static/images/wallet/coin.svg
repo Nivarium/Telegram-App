@@ -1,0 +1,44 @@
+<svg width="51" height="52" viewBox="0 0 51 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_252_39053)">
+<circle cx="25.5" cy="26" r="19.75" fill="url(#paint0_linear_252_39053)" stroke="#583DCC" stroke-width="0.5"/>
+<path d="M25.25 26.25L17.75 22.5" stroke="#583DCC" stroke-width="0.5"/>
+<path d="M25.25 30.25L20.25 27.75" stroke="#583DCC" stroke-width="0.5"/>
+<path d="M25.25 34.25L20.25 31.75" stroke="#583DCC" stroke-width="0.5"/>
+<path d="M25.25 34.25L33.25 30.25" stroke="#583DCC" stroke-width="0.5"/>
+<path d="M25.25 30.25L33.25 26.25" stroke="#583DCC" stroke-width="0.5"/>
+<path d="M25.25 26.25L33.25 22.25" stroke="#583DCC" stroke-width="0.5"/>
+<path d="M24.75 22.75L29.75 20.25" stroke="#583DCC" stroke-width="0.5"/>
+<path d="M21.25 20.75L26.25 18.25" stroke="#583DCC" stroke-width="0.5"/>
+<path d="M17.25 22.5V30.25" stroke="#583DCC" stroke-width="0.5"/>
+<path d="M26.75 33.5L25.6972 34.0264C25.4157 34.1672 25.0843 34.1672 24.8028 34.0264L23.75 33.5" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M26.75 29.5L25.6972 30.0264C25.4157 30.1672 25.0843 30.1672 24.8028 30.0264L23.75 29.5" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M26.75 25.5L25.6972 26.0264C25.4157 26.1672 25.0843 26.1672 24.8028 26.0264L23.75 25.5" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M17.25 29V30.25" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M17.25 23.75V23.059C17.25 22.6873 17.6412 22.4456 17.9736 22.6118L18.75 23" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M33.25 22.25L32.25 22.75" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M33.25 26.25L32.25 26.75" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M33.25 30.25L32.25 30.75" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M24.75 22.75L25.75 22.25" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M21.25 20.75L22.25 20.25" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M28.75 20.75L29.75 20.25" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M25.25 18.75L26.25 18.25" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M20.25 27.75L21.25 28.25" stroke="#705ACB" stroke-linecap="round"/>
+<path d="M20.25 31.75L21.25 32.25" stroke="#705ACB" stroke-linecap="round"/>
+</g>
+<defs>
+<filter id="filter0_d_252_39053" x="0.166667" y="0.666667" width="50.6667" height="50.6667" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="2.66667"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.345098 0 0 0 0 0.239216 0 0 0 0 0.8 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_252_39053"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_252_39053" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear_252_39053" x1="45.5" y1="26" x2="5.5" y2="26" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0B1218"/>
+<stop offset="1" stop-color="#141D24"/>
+</linearGradient>
+</defs>
+</svg>

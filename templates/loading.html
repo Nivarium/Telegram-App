@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style/loadingstyle.css"> 
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Nivarium</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {          
+            if (window.Telegram && window.Telegram.WebApp) {           
+                window.Telegram.WebApp.expand();
+            }
+        });
+     </script>
+</head>
+
+<body>
+    <div class="content">
+        <div class="logo-loading">
+            <img class="img-logo" src="/static/images/logo.svg" alt="Logo">
+            <p class="nivarium-text">NIVARIUM</p>
+        </div>
+
+        <div class="loading-animate">
+            <svg viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;"></circle>
+            </svg>
+            <svg viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;"></circle>
+            </svg>
+            <svg viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="50" style="stroke-dasharray: 242; stroke-dashoffset: 242;"></circle>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const telegramId = urlParams.get('telegram_id');
+        const telegramName = urlParams.get('telegram_name');
+        const refId = urlParams.get('ref_id');
+
+        setTimeout(() => {
+            window.location.href = `/nivarium?telegram_id=${telegramId}&telegram_name=${telegramName}&ref_id=${refId}`;
+        }, 3000); 
+    </script>
+</body>
+
+</html>

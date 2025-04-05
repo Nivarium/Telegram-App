@@ -1,0 +1,22 @@
+<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_248_20135)">
+<g filter="url(#filter0_f_248_20135)">
+<rect width="20" height="20" rx="10" transform="matrix(0.873877 -0.486148 0.50209 0.864815 -1 9)" fill="url(#paint0_radial_248_20135)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_248_20135" x="1.6795" y="1.86401" width="22.1603" height="21.8453" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.5" result="effect1_foregroundBlur_248_20135"/>
+</filter>
+<radialGradient id="paint0_radial_248_20135" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(10) rotate(90) scale(20)">
+<stop stop-color="#7940F0"/>
+<stop offset="0.5" stop-color="#6220F3"/>
+<stop offset="1" stop-color="#7940F0"/>
+</radialGradient>
+<clipPath id="clip0_248_20135">
+<rect width="26" height="26" fill="white"/>
+</clipPath>
+</defs>
+</svg>
